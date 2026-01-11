@@ -264,18 +264,18 @@ section {
 
 /* Hero Profile */
 .hero-profile {
-    flex: 1.2;
+    flex: 1.3;
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 600px;
+    max-width: 750px;
     position: relative;
 }
 
 .profile-frame {
     position: relative;
     width: 100%;
-    max-width: 550px;
+    max-width: 720px;
     border-radius: 45% / 35%;
     overflow: hidden;
     box-shadow:
