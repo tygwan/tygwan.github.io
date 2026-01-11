@@ -264,24 +264,59 @@ section {
 
 /* Hero Profile */
 .hero-profile {
-    flex: 1;
+    flex: 1.2;
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 500px;
+    max-width: 600px;
+    position: relative;
+}
+
+.profile-frame {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    border-radius: 45% / 35%;
+    overflow: hidden;
+    box-shadow:
+        0 20px 60px rgba(193, 95, 60, 0.3),
+        0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.profile-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(193, 95, 60, 0.15) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(193, 95, 60, 0.1) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+.profile-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 45% / 35%;
+    border: 3px solid rgba(193, 95, 60, 0.3);
+    z-index: 2;
+    pointer-events: none;
 }
 
 .profile-image {
     width: 100%;
-    max-width: 450px;
     height: auto;
-    border-radius: 16px;
-    box-shadow: var(--shadow-lg);
-    transition: transform var(--transition);
+    display: block;
+    transition: transform 0.5s ease;
 }
 
-.profile-image:hover {
-    transform: scale(1.02);
+.profile-frame:hover .profile-image {
+    transform: scale(1.03);
 }
 
 /* ===================================
@@ -774,11 +809,11 @@ section {
 
     .hero-profile {
         max-width: 100%;
-        margin-top: 32px;
+        margin-top: 40px;
     }
 
-    .profile-image {
-        max-width: 350px;
+    .profile-frame {
+        max-width: 400px;
     }
 
     /* About */
