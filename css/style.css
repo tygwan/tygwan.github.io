@@ -944,56 +944,128 @@ section {
 }
 
 .modal-readme {
-    background: var(--claude-pampas);
+    background: var(--claude-white);
+    border: 1px solid var(--claude-cloudy);
     border-radius: var(--border-radius);
-    padding: 24px;
+    padding: 28px;
     margin-bottom: 24px;
-    max-height: 300px;
+    max-height: 450px;
     overflow-y: auto;
 }
 
 .modal-readme h1,
 .modal-readme h2,
-.modal-readme h3 {
-    font-size: 1.1rem;
+.modal-readme h3,
+.modal-readme h4,
+.modal-readme h5,
+.modal-readme h6 {
+    color: var(--claude-dark) !important;
+    background: transparent !important;
+    margin-top: 20px;
     margin-bottom: 12px;
-    color: var(--claude-dark);
+    font-family: var(--font-serif);
 }
 
-.modal-readme p {
+.modal-readme h1 { font-size: 1.4rem; border-bottom: 1px solid var(--claude-cloudy); padding-bottom: 8px; }
+.modal-readme h2 { font-size: 1.2rem; border-bottom: 1px solid var(--claude-pampas); padding-bottom: 6px; }
+.modal-readme h3 { font-size: 1.1rem; }
+
+.modal-readme p,
+.modal-readme span,
+.modal-readme div {
+    color: var(--claude-text) !important;
+    background: transparent !important;
+    font-size: 0.95rem;
+    line-height: 1.7;
     margin-bottom: 12px;
-    color: var(--claude-text-light);
-    font-size: 0.9rem;
-    line-height: 1.6;
+}
+
+.modal-readme a {
+    color: var(--claude-primary) !important;
+    text-decoration: underline;
 }
 
 .modal-readme code {
-    background: var(--claude-white);
-    padding: 2px 6px;
+    background: var(--claude-pampas) !important;
+    color: var(--claude-dark) !important;
+    padding: 2px 8px;
     border-radius: 4px;
     font-size: 0.85rem;
+    font-family: 'Consolas', 'Monaco', monospace;
 }
 
 .modal-readme pre {
-    background: var(--claude-dark);
-    color: var(--claude-pampas);
+    background: #1e1e1e !important;
+    color: #d4d4d4 !important;
     padding: 16px;
     border-radius: var(--border-radius);
     overflow-x: auto;
     font-size: 0.85rem;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.modal-readme pre code {
+    background: transparent !important;
+    color: inherit !important;
+    padding: 0;
 }
 
 .modal-readme ul,
 .modal-readme ol {
-    margin-left: 20px;
-    margin-bottom: 12px;
+    margin-left: 24px;
+    margin-bottom: 16px;
+    color: var(--claude-text) !important;
 }
 
 .modal-readme li {
-    color: var(--claude-text-light);
-    font-size: 0.9rem;
-    margin-bottom: 4px;
+    color: var(--claude-text) !important;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    line-height: 1.6;
+}
+
+.modal-readme blockquote {
+    border-left: 4px solid var(--claude-primary);
+    padding-left: 16px;
+    margin: 16px 0;
+    color: var(--claude-text-light) !important;
+    background: var(--claude-pampas) !important;
+    padding: 12px 16px;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.modal-readme img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    margin: 12px 0;
+}
+
+.modal-readme table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+
+.modal-readme th,
+.modal-readme td {
+    border: 1px solid var(--claude-cloudy);
+    padding: 8px 12px;
+    text-align: left;
+    color: var(--claude-text) !important;
+    background: transparent !important;
+}
+
+.modal-readme th {
+    background: var(--claude-pampas) !important;
+    font-weight: 600;
+}
+
+.modal-readme hr {
+    border: none;
+    border-top: 1px solid var(--claude-cloudy);
+    margin: 20px 0;
 }
 
 .modal-actions {
