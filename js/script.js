@@ -30,11 +30,16 @@ const CONFIG = {
     }
 };
 
+// Store repos data for modal
+let reposData = [];
+
 // DOM Elements
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 const nav = document.getElementById('nav');
 const projectsGrid = document.getElementById('projects-grid');
+const modal = document.getElementById('project-modal');
+const modalClose = document.getElementById('modal-close');
 
 // ===================================
 // Navigation
@@ -114,6 +119,9 @@ async function loadProjects() {
             return indexA - indexB;
         });
 
+        // Store for modal use
+        reposData = featuredRepos;
+
         displayProjects(featuredRepos);
 
     } catch (error) {
@@ -136,6 +144,15 @@ function displayProjects(repos) {
     }
 
     projectsGrid.innerHTML = repos.map(repo => createProjectCard(repo)).join('');
+
+    // Add click event listeners to cards
+    projectsGrid.querySelectorAll('.project-card').forEach((card, index) => {
+        card.addEventListener('click', (e) => {
+            // Don't open modal if clicking on the GitHub link
+            if (e.target.closest('.project-link')) return;
+            openModal(repos[index]);
+        });
+    });
 }
 
 // Create project card HTML
@@ -144,7 +161,7 @@ function createProjectCard(repo) {
     const description = repo.description || 'No description available';
 
     return `
-        <article class="project-card">
+        <article class="project-card" data-repo="${repo.name}">
             <div class="project-header">
                 <h3 class="project-title">${repo.name}</h3>
                 <a href="${repo.html_url}" target="_blank" rel="noopener" class="project-link" aria-label="View on GitHub">
@@ -204,6 +221,141 @@ function escapeHtml(text) {
     div.textContent = text;
     return div.innerHTML;
 }
+
+// ===================================
+// Project Modal
+// ===================================
+
+// Open modal with project details
+async function openModal(repo) {
+    if (!modal) return;
+
+    const modalTitle = document.getElementById('modal-title');
+    const modalLanguage = document.getElementById('modal-language');
+    const modalDescription = document.getElementById('modal-description');
+    const modalStats = document.getElementById('modal-stats');
+    const modalReadme = document.getElementById('modal-readme');
+    const modalRepoLink = document.getElementById('modal-repo-link');
+
+    // Set basic info
+    modalTitle.textContent = repo.name;
+    modalLanguage.textContent = repo.language || 'Unknown';
+    modalDescription.textContent = repo.description || 'No description available';
+    modalRepoLink.href = repo.html_url;
+
+    // Set stats
+    modalStats.innerHTML = `
+        <span class="modal-stat">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/>
+            </svg>
+            ${repo.stargazers_count} Stars
+        </span>
+        <span class="modal-stat">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"/>
+            </svg>
+            ${repo.forks_count} Forks
+        </span>
+        <span class="modal-stat">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"/>
+            </svg>
+            ${repo.open_issues_count} Issues
+        </span>
+    `;
+
+    // Loading state for README
+    modalReadme.innerHTML = `
+        <div class="loading-spinner"></div>
+        <p style="text-align: center;">Loading README...</p>
+    `;
+
+    // Show modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Fetch README
+    try {
+        const readmeResponse = await fetch(
+            `https://api.github.com/repos/${CONFIG.githubUsername}/${repo.name}/readme`,
+            {
+                headers: {
+                    'Accept': 'application/vnd.github.v3.raw'
+                }
+            }
+        );
+
+        if (readmeResponse.ok) {
+            const readmeContent = await readmeResponse.text();
+            modalReadme.innerHTML = formatReadme(readmeContent);
+        } else {
+            modalReadme.innerHTML = '<p>No README available for this project.</p>';
+        }
+    } catch (error) {
+        console.error('Error fetching README:', error);
+        modalReadme.innerHTML = '<p>Unable to load README.</p>';
+    }
+}
+
+// Close modal
+function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Format README (simple markdown to HTML)
+function formatReadme(markdown) {
+    let html = escapeHtml(markdown);
+
+    // Headers
+    html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+    html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+    html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+    // Code blocks
+    html = html.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    // Bold and italic
+    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+    // Lists
+    html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+    html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+
+    // Paragraphs
+    html = html.replace(/\n\n/g, '</p><p>');
+    html = '<p>' + html + '</p>';
+
+    // Clean up
+    html = html.replace(/<p><\/p>/g, '');
+    html = html.replace(/<p>(<h[1-3]>)/g, '$1');
+    html = html.replace(/(<\/h[1-3]>)<\/p>/g, '$1');
+    html = html.replace(/<p>(<ul>)/g, '$1');
+    html = html.replace(/(<\/ul>)<\/p>/g, '$1');
+    html = html.replace(/<p>(<pre>)/g, '$1');
+    html = html.replace(/(<\/pre>)<\/p>/g, '$1');
+
+    return html;
+}
+
+// Modal event listeners
+modalClose?.addEventListener('click', closeModal);
+
+modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
 
 // ===================================
 // Intersection Observer for Animations
