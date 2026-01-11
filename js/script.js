@@ -241,7 +241,9 @@ async function openModal(repo) {
     modalTitle.textContent = repo.name;
     modalLanguage.textContent = repo.language || 'Unknown';
     modalDescription.textContent = repo.description || 'No description available';
-    modalRepoLink.href = repo.html_url;
+
+    // Store URL for button click
+    currentRepoUrl = repo.html_url;
 
     // Calculate development period
     const createdDate = new Date(repo.created_at);
@@ -326,12 +328,23 @@ function formatReadme(markdown) {
     return '<pre>' + escapeHtml(markdown) + '</pre>';
 }
 
+// Store current repo URL for the button
+let currentRepoUrl = '';
+
 // Modal event listeners
 modalClose?.addEventListener('click', closeModal);
 
 modal?.addEventListener('click', (e) => {
     if (e.target === modal) {
         closeModal();
+    }
+});
+
+// View Repository button click handler
+document.getElementById('modal-repo-link')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentRepoUrl) {
+        window.open(currentRepoUrl, '_blank', 'noopener');
     }
 });
 
