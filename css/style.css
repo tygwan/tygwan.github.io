@@ -517,6 +517,205 @@ section {
 }
 
 /* ===================================
+   Timeline Section
+   =================================== */
+.timeline {
+    background: var(--claude-pampas);
+}
+
+.timeline-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 40px;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--claude-primary), var(--claude-cloudy));
+    border-radius: 3px;
+}
+
+/* Year Badge */
+.timeline-year {
+    position: relative;
+    margin: 32px 0 24px -40px;
+    padding-left: 40px;
+}
+
+.year-badge {
+    display: inline-block;
+    background: var(--claude-primary);
+    color: white;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 8px 24px;
+    border-radius: 30px;
+    box-shadow: var(--shadow-md);
+}
+
+/* Timeline Item */
+.timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    padding-left: 24px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -32px;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid var(--claude-white);
+    box-shadow: 0 0 0 3px var(--claude-cloudy);
+    background: var(--claude-cloudy);
+}
+
+.timeline-marker.sci {
+    background: #2563eb;
+    box-shadow: 0 0 0 3px #2563eb;
+}
+
+.timeline-marker.award {
+    background: #f59e0b;
+    box-shadow: 0 0 0 3px #f59e0b;
+}
+
+.timeline-marker.conference {
+    background: #10b981;
+    box-shadow: 0 0 0 3px #10b981;
+}
+
+.timeline-marker.paper {
+    background: #8b5cf6;
+    box-shadow: 0 0 0 3px #8b5cf6;
+}
+
+.timeline-marker.project {
+    background: var(--claude-primary);
+    box-shadow: 0 0 0 3px var(--claude-primary);
+}
+
+.timeline-content {
+    background: var(--claude-white);
+    padding: 20px 24px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition);
+}
+
+.timeline-content:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+.timeline-date {
+    font-size: 0.85rem;
+    color: var(--claude-cloudy);
+    font-weight: 500;
+}
+
+.timeline-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.timeline-tag.sci {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.timeline-tag.award {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.timeline-tag.conference {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.timeline-tag.paper {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.timeline-tag.project {
+    background: #fee2e2;
+    color: var(--claude-primary-dark);
+}
+
+.timeline-content h4 {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--claude-dark);
+    margin: 12px 0 8px;
+}
+
+.timeline-content p {
+    font-size: 0.95rem;
+    color: var(--claude-text-light);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.timeline-content .timeline-sub {
+    font-size: 0.85rem;
+    color: var(--claude-cloudy);
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* Timeline Responsive */
+@media (max-width: 768px) {
+    .timeline-container {
+        padding-left: 30px;
+    }
+
+    .timeline-container::before {
+        left: 10px;
+    }
+
+    .timeline-year {
+        margin-left: -30px;
+        padding-left: 30px;
+    }
+
+    .timeline-item {
+        padding-left: 16px;
+    }
+
+    .timeline-marker {
+        left: -26px;
+        width: 12px;
+        height: 12px;
+    }
+
+    .timeline-content {
+        padding: 16px;
+    }
+
+    .year-badge {
+        font-size: 1.1rem;
+        padding: 6px 20px;
+    }
+}
+
+/* ===================================
    Skills Section
    =================================== */
 .skills {
