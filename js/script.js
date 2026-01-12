@@ -7,12 +7,15 @@ const CONFIG = {
     githubUsername: 'tygwan',
     featuredProjects: [
         'AgenticLabeling',
+        'cc-initializer',
         'DXTnavis',
         'AgenticREVIT',
-        'cc-initializer',
+        'n8n'
+    ],
+    experimentalProjects: [
         'algo-quant',
         'palantir-stock',
-        'n8n'
+        'med-vision'
     ],
     // Language colors (GitHub style)
     languageColors: {
@@ -38,6 +41,7 @@ const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 const nav = document.getElementById('nav');
 const projectsGrid = document.getElementById('projects-grid');
+const experimentalGrid = document.getElementById('experimental-grid');
 const modal = document.getElementById('project-modal');
 const modalClose = document.getElementById('modal-close');
 
@@ -108,7 +112,14 @@ async function loadProjects() {
             )
         );
 
-        // Sort by featured order
+        // Filter experimental projects
+        const experimentalRepos = repos.filter(repo =>
+            CONFIG.experimentalProjects.some(name =>
+                name.toLowerCase() === repo.name.toLowerCase()
+            )
+        );
+
+        // Sort featured by order
         featuredRepos.sort((a, b) => {
             const indexA = CONFIG.featuredProjects.findIndex(
                 name => name.toLowerCase() === a.name.toLowerCase()
@@ -119,10 +130,23 @@ async function loadProjects() {
             return indexA - indexB;
         });
 
-        // Store for modal use
-        reposData = featuredRepos;
+        // Sort experimental by order
+        experimentalRepos.sort((a, b) => {
+            const indexA = CONFIG.experimentalProjects.findIndex(
+                name => name.toLowerCase() === a.name.toLowerCase()
+            );
+            const indexB = CONFIG.experimentalProjects.findIndex(
+                name => name.toLowerCase() === b.name.toLowerCase()
+            );
+            return indexA - indexB;
+        });
 
-        displayProjects(featuredRepos);
+        // Store all repos for modal use
+        reposData = [...featuredRepos, ...experimentalRepos];
+
+        // Display both grids
+        displayProjects(featuredRepos, projectsGrid);
+        displayProjects(experimentalRepos, experimentalGrid, true);
 
     } catch (error) {
         console.error('Error loading projects:', error);
@@ -131,22 +155,22 @@ async function loadProjects() {
 }
 
 // Display projects in grid
-function displayProjects(repos) {
-    if (!projectsGrid) return;
+function displayProjects(repos, gridElement, isExperimental = false) {
+    if (!gridElement) return;
 
     if (repos.length === 0) {
-        projectsGrid.innerHTML = `
+        gridElement.innerHTML = `
             <div class="projects-loading">
-                <p>No featured projects found.</p>
+                <p>No ${isExperimental ? 'experimental' : 'featured'} projects found.</p>
             </div>
         `;
         return;
     }
 
-    projectsGrid.innerHTML = repos.map(repo => createProjectCard(repo)).join('');
+    gridElement.innerHTML = repos.map(repo => createProjectCard(repo, isExperimental)).join('');
 
     // Add click event listeners to cards
-    projectsGrid.querySelectorAll('.project-card').forEach((card, index) => {
+    gridElement.querySelectorAll('.project-card').forEach((card, index) => {
         card.addEventListener('click', (e) => {
             // Don't open modal if clicking on the GitHub link
             if (e.target.closest('.project-link')) return;
@@ -156,10 +180,10 @@ function displayProjects(repos) {
 }
 
 // Create project card HTML
-function createProjectCard(repo) {
+function createProjectCard(repo, isExperimental = false) {
     const languageColor = CONFIG.languageColors[repo.language] || CONFIG.languageColors.default;
     const description = repo.description || 'No description available';
-    const isFeatured = repo.name.toLowerCase() === 'cc-initializer';
+    const isFeatured = repo.name.toLowerCase() === 'cc-initializer' || repo.name.toLowerCase() === 'agenticlabeling';
 
     return `
         <article class="project-card${isFeatured ? ' featured' : ''}" data-repo="${repo.name}">
