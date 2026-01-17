@@ -189,55 +189,40 @@ section {
 }
 
 /* ===================================
-   Hero Section (Side-by-Side Layout)
+   Hero Section (All-in-One Layout)
    =================================== */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
     background: linear-gradient(135deg, var(--claude-pampas) 0%, var(--claude-white) 100%);
-    padding-top: 100px;
-    padding-bottom: 60px;
+    padding-top: 80px;
+    padding-bottom: 40px;
     position: relative;
     overflow: hidden;
 }
 
 .hero-split {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
+    grid-template-columns: 400px 1fr;
+    gap: 48px;
+    align-items: start;
 }
 
 /* Hero Profile - Left Side */
 .hero-profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: sticky;
+    top: 100px;
 }
 
 .profile-frame {
     position: relative;
     width: 100%;
-    max-width: 450px;
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
     box-shadow:
-        0 25px 60px rgba(193, 95, 60, 0.2),
-        0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.profile-frame::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        135deg,
-        rgba(193, 95, 60, 0.1) 0%,
-        transparent 50%
-    );
-    z-index: 1;
-    pointer-events: none;
+        0 20px 50px rgba(193, 95, 60, 0.15),
+        0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 .profile-image {
@@ -248,51 +233,167 @@ section {
 }
 
 .profile-frame:hover .profile-image {
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 /* Hero About - Right Side */
 .hero-about {
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Hero Intro */
+.hero-intro {
+    margin-bottom: 8px;
 }
 
 .hero-greeting {
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: var(--claude-primary);
     font-weight: 600;
-    margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    margin-bottom: 8px;
 }
 
 .hero-title {
-    font-size: 3rem;
-    margin-bottom: 16px;
+    font-size: 2.5rem;
+    margin-bottom: 12px;
     background: linear-gradient(135deg, var(--claude-dark) 0%, var(--claude-primary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.about-lead {
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    color: var(--claude-primary);
-    margin-bottom: 16px;
-    font-style: italic;
-}
-
 .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--claude-text-light);
-    margin-bottom: 32px;
-    line-height: 1.8;
+    line-height: 1.6;
 }
 
+/* Hero Info Grid */
+.hero-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.info-box {
+    background: var(--claude-white);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.info-title {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--claude-dark);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--claude-pampas);
+}
+
+/* Education Compact */
+.edu-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.edu-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.edu-badge {
+    background: var(--claude-primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.edu-row strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--claude-dark);
+}
+
+.edu-meta {
+    font-size: 0.75rem;
+    color: var(--claude-text-light);
+}
+
+/* Awards Compact */
+.awards-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.award-row {
+    font-size: 0.85rem;
+    color: var(--claude-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.award-year {
+    background: var(--claude-pampas);
+    color: var(--claude-primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+/* Strengths */
+.hero-strengths {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.strength-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--claude-white);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--claude-text);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.strength-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.strength-tag span {
+    background: var(--claude-primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+/* Hero CTA */
 .hero-cta {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
+    margin-top: 8px;
 }
 
 /* Buttons */
@@ -332,12 +433,8 @@ section {
 }
 
 /* ===================================
-   About Details Section
+   About Section (Legacy - kept for about-grid)
    =================================== */
-.about-details {
-    background: var(--claude-white);
-    padding: 80px 0;
-}
 
 /* About Grid */
 .about-grid {
@@ -618,6 +715,15 @@ section {
 
 /* Timeline Responsive */
 @media (max-width: 1024px) {
+    .hero-split {
+        grid-template-columns: 350px 1fr;
+        gap: 32px;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
     .timeline-grid {
         grid-template-columns: 1fr 1fr;
     }
@@ -1315,21 +1421,34 @@ section {
     /* Hero - Stack vertically on mobile */
     .hero-split {
         grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
+        gap: 32px;
     }
 
     .hero-profile {
+        position: static;
         order: -1;
+        display: flex;
+        justify-content: center;
     }
 
     .profile-frame {
-        max-width: 300px;
-        margin: 0 auto;
+        max-width: 280px;
     }
 
     .hero-about {
         text-align: center;
+    }
+
+    .hero-intro {
+        text-align: center;
+    }
+
+    .hero-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-strengths {
+        justify-content: center;
     }
 
     .hero-cta {
@@ -1337,7 +1456,7 @@ section {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     /* About */
