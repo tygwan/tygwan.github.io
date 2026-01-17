@@ -40,42 +40,38 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero + About Section (Combined) -->
     <section class="hero" id="hero">
         <div class="container">
-            <div class="hero-content">
-                <p class="hero-greeting">Hello, I'm</p>
-                <h1 class="hero-title">AI-Native Developer</h1>
-                <p class="hero-subtitle">
-                    AI를 도구처럼 자연스럽게 활용하여<br>
-                    복잡한 문제를 단순하게 해결합니다.
-                </p>
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">View Projects</a>
-                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            <div class="hero-split">
+                <!-- Left: Profile Image -->
+                <div class="hero-profile">
+                    <div class="profile-frame">
+                        <img src="assets/profile.png" alt="윤태관 프로필" class="profile-image">
+                    </div>
                 </div>
-            </div>
-            <div class="hero-profile">
-                <div class="profile-frame">
-                    <img src="assets/profile.png" alt="윤태관 프로필" class="profile-image">
+
+                <!-- Right: About Content -->
+                <div class="hero-about" id="about">
+                    <p class="hero-greeting">Hello, I'm</p>
+                    <h1 class="hero-title">AI-Native Developer</h1>
+                    <p class="about-lead">Building with AI, not just about AI.</p>
+                    <p class="hero-subtitle">
+                        건축공학 기반의 분석 노하우와 AI/Computer Vision 기술을 결합하여
+                        다양한 도메인의 실질적인 문제를 해결하는 개발자입니다.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
+    <!-- About Details Section -->
+    <section class="about-details">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-
-            <!-- Intro -->
-            <div class="about-intro">
-                <p class="about-lead">Building with AI, not just about AI.</p>
-                <p class="about-desc">
-                    건축공학 기반의 분석 노하우와 AI/Computer Vision 기술을 결합하여
-                    다양한 도메인의 실질적인 문제를 해결하는 개발자입니다.
-                </p>
-            </div>
 
             <div class="about-grid">
                 <!-- Education -->
@@ -177,123 +173,96 @@
         </div>
     </section>
 
-    <!-- Timeline Section -->
-    <section class="timeline" id="timeline">
+    <!-- Timeline Section (Compact Grid) -->
+    <section class="timeline-compact" id="timeline">
         <div class="container">
             <h2 class="section-title">Academic Timeline</h2>
             <p class="section-subtitle">연구 및 학술 활동 기록</p>
 
-            <div class="timeline-container">
-                <!-- 2025 -->
-                <div class="timeline-year">
-                    <span class="year-badge">2025</span>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker sci"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2025.08</span>
-                        <span class="timeline-tag sci">SCI Under Review</span>
+            <div class="timeline-grid">
+                <!-- Publications Column -->
+                <div class="timeline-column">
+                    <h3 class="timeline-column-title">
+                        <span class="column-icon sci"></span>
+                        Publications
+                    </h3>
+                    <div class="timeline-card sci">
+                        <span class="card-date">2025.08</span>
+                        <span class="card-tag">SCI Under Review</span>
                         <h4>SCI 논문 투고</h4>
-                        <p>Pedestrian Safety Audits near Construction Sites via Open-Vocabulary Vision-Language Segmentation with Few-Shot Filtering</p>
+                        <p>Pedestrian Safety Audits via Open-Vocabulary Vision-Language Segmentation</p>
+                    </div>
+                    <div class="timeline-card sci">
+                        <span class="card-date">2025.05</span>
+                        <span class="card-tag">SCI Published</span>
+                        <h4>Applied Sciences 게재</h4>
+                        <p>Pedestrian Perceived Risk of Construction Obstructions via Image Segmentation</p>
+                    </div>
+                    <div class="timeline-card paper">
+                        <span class="card-date">2025.01</span>
+                        <span class="card-tag">학술원고</span>
+                        <h4>건설관리학회 원고</h4>
+                        <p>Autodistill 기반 데이터 라벨링 자동화</p>
+                    </div>
+                    <div class="timeline-card paper">
+                        <span class="card-date">2024.05</span>
+                        <span class="card-tag">학술지</span>
+                        <h4>한국건설안전학회</h4>
+                        <p>텍스트 마이닝 기반 사고 데이터 분석</p>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-marker sci"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2025.05</span>
-                        <span class="timeline-tag sci">SCI Published</span>
-                        <h4>SCI 논문 게재 (MDPI, Applied Sciences)</h4>
-                        <p>Pedestrian Perceived Risk of Construction Obstructions and Barriers Identified via Image Segmentation</p>
+                <!-- Presentations & Awards Column -->
+                <div class="timeline-column">
+                    <h3 class="timeline-column-title">
+                        <span class="column-icon conference"></span>
+                        Presentations & Awards
+                    </h3>
+                    <div class="timeline-card conference">
+                        <span class="card-date">2024.07</span>
+                        <span class="card-tag">국제학회</span>
+                        <h4>ICCEPM 구두발표</h4>
+                        <p>Pedestrian Hazards near Construction Sites</p>
+                        <span class="card-sub">일본 삿포로, 홋카이도 대학</span>
+                    </div>
+                    <div class="timeline-card award">
+                        <span class="card-date">2023.11</span>
+                        <span class="card-tag highlight">최우수상</span>
+                        <h4>건설관리학회 학술대회</h4>
+                        <p>건설현장 인근 보행자 안전 위험요소 프로파일</p>
+                        <span class="card-sub">대학생부문 대표 수상</span>
+                    </div>
+                    <div class="timeline-card conference">
+                        <span class="card-date">2023.11</span>
+                        <span class="card-tag">포스터</span>
+                        <h4>건설관리학회 학술대회</h4>
+                        <p>BIM 기반 탄소 발자국 계산</p>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-marker project"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2025.04</span>
-                        <span class="timeline-tag project">연구과제</span>
+                <!-- Research Projects Column -->
+                <div class="timeline-column">
+                    <h3 class="timeline-column-title">
+                        <span class="column-icon project"></span>
+                        Research Projects
+                    </h3>
+                    <div class="timeline-card project">
+                        <span class="card-date">2025.04 ~</span>
+                        <span class="card-tag">연구과제</span>
                         <h4>이어달리기사업 참여연구자</h4>
                         <p>디지털전환 기술기반 플랜트 건설 사업관리 기술개발</p>
                     </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker paper"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2025.01</span>
-                        <span class="timeline-tag paper">학술원고</span>
-                        <h4>건설관리학회 원고</h4>
-                        <p>스마트 건설기술을 위한 새로운 도전: Autodistill 기반 데이터 라벨링 자동화</p>
-                        <p class="timeline-sub">Pedestrian Safety Audits via Vision-Language Segmentation and Few-Shot Filtering 방법론 제안</p>
+                    <div class="timeline-card project">
+                        <span class="card-date">2022.06 ~ 2025.02</span>
+                        <span class="card-tag">연구과제</span>
+                        <h4>학부연구생 → 참여연구원</h4>
+                        <p>영상 기반 보행 패턴 분석을 통한 안전한 보행환경 조성</p>
                     </div>
-                </div>
-
-                <!-- 2024 -->
-                <div class="timeline-year">
-                    <span class="year-badge">2024</span>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker conference"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2024.07</span>
-                        <span class="timeline-tag conference">국제학회</span>
-                        <h4>2024 ICCEPM 구두발표</h4>
-                        <p>Identifying Potential Risk Factors Contributing to Pedestrian Hazards near Construction Sites</p>
-                        <p class="timeline-sub">일본 삿포로, 홋카이도 대학</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker paper"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2024.05</span>
-                        <span class="timeline-tag paper">학술지</span>
-                        <h4>한국건설안전학회 학술지 게재</h4>
-                        <p>건설 현장 보행자의 안전 향상을 위한 텍스트 마이닝 기반 사고 데이터 분석</p>
-                    </div>
-                </div>
-
-                <!-- 2023 -->
-                <div class="timeline-year">
-                    <span class="year-badge">2023</span>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker award"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2023.11</span>
-                        <span class="timeline-tag award">최우수상</span>
-                        <h4>한국건설관리학회 전국대학생학술발표대회</h4>
-                        <p>건설현장 인근 보행자 안전 위험요소 프로파일</p>
-                        <p class="timeline-sub">대학생부문 최우수상 대표 수상</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker conference"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2023.11</span>
-                        <span class="timeline-tag conference">포스터발표</span>
-                        <h4>한국건설관리학회 전국대학생학술발표대회</h4>
-                        <p>탄소 중립 건축을 위한 BIM 기반 탄소 발자국 계산</p>
-                    </div>
-                </div>
-
-                <!-- 2022 -->
-                <div class="timeline-year">
-                    <span class="year-badge">2022</span>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker project"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2022.06 ~ 2025.02</span>
-                        <span class="timeline-tag project">연구과제</span>
-                        <h4>학부연구생 / 참여연구원</h4>
-                        <p>건설현장 주변의 안전한 보행환경 조성을 위한 영상 기반 보행 패턴 분석</p>
+                    <div class="timeline-card award">
+                        <span class="card-date">2025</span>
+                        <span class="card-tag highlight">선발</span>
+                        <h4>산업안전상생재단 우수인재</h4>
+                        <p>멀티모달 기반 라벨링 자동화 연구</p>
                     </div>
                 </div>
             </div>
