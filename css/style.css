@@ -1187,7 +1187,7 @@ section {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    padding: 48px max(24px, calc((100vw - 1200px) / 2)) 100px;
+    padding-bottom: 60px;
 }
 
 .experimental-card {
