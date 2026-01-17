@@ -245,21 +245,26 @@ section {
 
 /* Hero Intro */
 .hero-intro {
-    margin-bottom: 8px;
+    background: var(--claude-white);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.04);
+    border-left: 4px solid var(--claude-primary);
 }
 
 .hero-greeting {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--claude-primary);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .hero-title {
-    font-size: 2.5rem;
-    margin-bottom: 12px;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
     background: linear-gradient(135deg, var(--claude-dark) 0%, var(--claude-primary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -267,7 +272,7 @@ section {
 }
 
 .hero-subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--claude-text-light);
     line-height: 1.6;
 }
@@ -276,7 +281,7 @@ section {
 .hero-info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 16px;
 }
 
 .info-box {
@@ -284,28 +289,49 @@ section {
     padding: 20px;
     border-radius: 12px;
     box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.04);
 }
 
 .info-title {
     font-family: var(--font-serif);
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--claude-dark);
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--claude-pampas);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--claude-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-title::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--claude-primary);
+    border-radius: 2px;
 }
 
 /* Education Compact */
 .edu-compact {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .edu-row {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
+    background: var(--claude-pampas);
+    padding: 12px 14px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.edu-row:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
 }
 
 .edu-badge {
@@ -313,15 +339,17 @@ section {
     color: white;
     font-size: 0.7rem;
     font-weight: 700;
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: 6px 10px;
+    border-radius: 6px;
     flex-shrink: 0;
+    margin-top: 2px;
 }
 
 .edu-row strong {
     display: block;
     font-size: 0.9rem;
     color: var(--claude-dark);
+    margin-bottom: 2px;
 }
 
 .edu-meta {
@@ -337,46 +365,59 @@ section {
 }
 
 .award-row {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--claude-text);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    background: var(--claude-pampas);
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.award-row:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
 }
 
 .award-year {
-    background: var(--claude-pampas);
-    color: var(--claude-primary);
-    font-size: 0.7rem;
+    background: var(--claude-primary);
+    color: white;
+    font-size: 0.65rem;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 10px;
+    padding: 4px 10px;
+    border-radius: 6px;
     flex-shrink: 0;
 }
 
 /* Strengths */
 .hero-strengths {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
 .strength-tag {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     background: var(--claude-white);
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    padding: 14px 10px;
+    border-radius: 10px;
+    font-size: 0.75rem;
     color: var(--claude-text);
     box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.04);
     transition: all 0.3s ease;
+    text-align: center;
 }
 
 .strength-tag:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-md);
+    border-color: var(--claude-primary);
 }
 
 .strength-tag span {
@@ -1448,7 +1489,7 @@ section {
     }
 
     .hero-strengths {
-        justify-content: center;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .hero-cta {
