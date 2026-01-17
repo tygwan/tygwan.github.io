@@ -390,15 +390,21 @@
                         <li>CUDA</li>
                         <li>MLflow</li>
                         <li>GitHub Actions</li>
-                        <li>n8n</li>
                     </ul>
                 </div>
                 <div class="skill-category">
-                    <h3>Agent & LLM</h3>
+                    <h3>AI-Native Tooling</h3>
+                    <ul class="skill-list">
+                        <li>Claude Code</li>
+                        <li>Codex</li>
+                        <li>n8n</li>
+                    </ul>
+                </div>
+                <div class="skill-category interested">
+                    <h3>Interested</h3>
                     <ul class="skill-list">
                         <li>LangChain</li>
                         <li>LangGraph</li>
-                        <li>Claude Code</li>
                     </ul>
                 </div>
             </div>
@@ -478,10 +484,59 @@
             <div class="modal-stats" id="modal-stats">
                 <!-- Stats will be inserted here -->
             </div>
-            <div class="modal-readme" id="modal-readme">
-                <div class="loading-spinner"></div>
-                <p>Loading README...</p>
+
+            <!-- Tab Navigation -->
+            <div class="modal-tabs">
+                <button class="modal-tab active" data-tab="overview">Overview</button>
+                <button class="modal-tab" data-tab="frontend">Frontend</button>
+                <button class="modal-tab" data-tab="backend">Backend</button>
+                <button class="modal-tab" data-tab="architecture">Architecture</button>
             </div>
+
+            <!-- Tab Contents -->
+            <div class="modal-tab-content active" id="tab-overview">
+                <div class="modal-readme" id="modal-readme">
+                    <div class="loading-spinner"></div>
+                    <p>Loading README...</p>
+                </div>
+            </div>
+
+            <div class="modal-tab-content" id="tab-frontend">
+                <div class="tech-section">
+                    <h4>Tech Stack</h4>
+                    <div class="tech-stack" id="frontend-stack"></div>
+                </div>
+                <div class="tech-section">
+                    <h4>Description</h4>
+                    <p id="frontend-description"></p>
+                </div>
+                <div class="tech-section" id="frontend-screenshots-section">
+                    <h4>Screenshots</h4>
+                    <div class="screenshots-grid" id="frontend-screenshots"></div>
+                </div>
+            </div>
+
+            <div class="modal-tab-content" id="tab-backend">
+                <div class="tech-section">
+                    <h4>Tech Stack</h4>
+                    <div class="tech-stack" id="backend-stack"></div>
+                </div>
+                <div class="tech-section">
+                    <h4>Description</h4>
+                    <p id="backend-description"></p>
+                </div>
+                <div class="tech-section" id="models-section">
+                    <h4>AI/ML Models</h4>
+                    <div class="tech-stack" id="models-stack"></div>
+                </div>
+            </div>
+
+            <div class="modal-tab-content" id="tab-architecture">
+                <div class="architecture-diagram" id="architecture-diagram">
+                    <p>No architecture diagram available.</p>
+                </div>
+            </div>
+
             <div class="modal-actions">
                 <a href="#" class="btn btn-primary" id="modal-repo-link" target="_blank" rel="noopener">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
@@ -495,6 +550,8 @@
 
     <!-- Markdown Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Mermaid.js for Architecture Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

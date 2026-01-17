@@ -36,6 +36,9 @@ const CONFIG = {
 // Store repos data for modal
 let reposData = [];
 
+// Store project details from data.json
+let projectDetailsData = {};
+
 // DOM Elements
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
@@ -251,6 +254,112 @@ function escapeHtml(text) {
 // Project Modal
 // ===================================
 
+// Load project details from data.json
+async function loadProjectDetails() {
+    try {
+        const response = await fetch('projects/data.json');
+        if (response.ok) {
+            projectDetailsData = await response.json();
+        }
+    } catch (error) {
+        console.error('Error loading project details:', error);
+    }
+}
+
+// Initialize Mermaid
+function initMermaid() {
+    if (typeof mermaid !== 'undefined') {
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'neutral',
+            securityLevel: 'loose',
+            fontFamily: 'Inter, sans-serif'
+        });
+    }
+}
+
+// Render Mermaid diagram
+async function renderMermaidDiagram(code, containerId) {
+    if (typeof mermaid === 'undefined') return;
+
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    try {
+        const { svg } = await mermaid.render('mermaid-' + Date.now(), code);
+        container.innerHTML = svg;
+    } catch (error) {
+        console.error('Mermaid render error:', error);
+        container.innerHTML = '<p>Failed to render architecture diagram.</p>';
+    }
+}
+
+// Setup modal tabs
+function setupModalTabs() {
+    const tabs = document.querySelectorAll('.modal-tab');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active from all tabs and contents
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
+
+            // Add active to clicked tab and corresponding content
+            tab.classList.add('active');
+            const tabId = tab.getAttribute('data-tab');
+            document.getElementById(`tab-${tabId}`)?.classList.add('active');
+        });
+    });
+}
+
+// Populate tech stack tags
+function populateTechStack(containerId, stack) {
+    const container = document.getElementById(containerId);
+    if (!container || !stack || stack.length === 0) {
+        if (container) container.innerHTML = '<span class="no-screenshots">No tech stack specified</span>';
+        return;
+    }
+
+    container.innerHTML = stack.map(tech =>
+        `<span class="tech-tag">${escapeHtml(tech)}</span>`
+    ).join('');
+}
+
+// Populate models tags
+function populateModels(containerId, models) {
+    const container = document.getElementById(containerId);
+    const section = document.getElementById('models-section');
+
+    if (!models || models.length === 0) {
+        if (section) section.style.display = 'none';
+        return;
+    }
+
+    if (section) section.style.display = 'block';
+    if (container) {
+        container.innerHTML = models.map(model =>
+            `<span class="tech-tag model">${escapeHtml(model)}</span>`
+        ).join('');
+    }
+}
+
+// Populate screenshots
+function populateScreenshots(containerId, screenshots) {
+    const container = document.getElementById(containerId);
+    const section = document.getElementById('frontend-screenshots-section');
+
+    if (!screenshots || screenshots.length === 0) {
+        if (section) section.style.display = 'none';
+        return;
+    }
+
+    if (section) section.style.display = 'block';
+    if (container) {
+        container.innerHTML = screenshots.map(src =>
+            `<div class="screenshot-item"><img src="${escapeHtml(src)}" alt="Screenshot" loading="lazy"></div>`
+        ).join('');
+    }
+}
+
 // Open modal with project details
 async function openModal(repo) {
     if (!modal) return;
@@ -260,7 +369,6 @@ async function openModal(repo) {
     const modalDescription = document.getElementById('modal-description');
     const modalStats = document.getElementById('modal-stats');
     const modalReadme = document.getElementById('modal-readme');
-    const modalRepoLink = document.getElementById('modal-repo-link');
 
     // Set basic info
     modalTitle.textContent = repo.name;
@@ -299,11 +407,50 @@ async function openModal(repo) {
         </span>
     `;
 
+    // Reset to Overview tab
+    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelector('.modal-tab[data-tab="overview"]')?.classList.add('active');
+    document.getElementById('tab-overview')?.classList.add('active');
+
     // Loading state for README
     modalReadme.innerHTML = `
         <div class="loading-spinner"></div>
         <p style="text-align: center;">Loading README...</p>
     `;
+
+    // Populate project details from data.json
+    const projectDetails = projectDetailsData[repo.name];
+    if (projectDetails) {
+        // Frontend tab
+        populateTechStack('frontend-stack', projectDetails.frontend?.stack);
+        document.getElementById('frontend-description').textContent =
+            projectDetails.frontend?.description || 'No description available';
+        populateScreenshots('frontend-screenshots', projectDetails.frontend?.screenshots);
+
+        // Backend tab
+        populateTechStack('backend-stack', projectDetails.backend?.stack);
+        document.getElementById('backend-description').textContent =
+            projectDetails.backend?.description || 'No description available';
+        populateModels('models-stack', projectDetails.models);
+
+        // Architecture tab
+        const archDiagram = document.getElementById('architecture-diagram');
+        if (projectDetails.backend?.architecture?.type === 'mermaid') {
+            await renderMermaidDiagram(projectDetails.backend.architecture.code, 'architecture-diagram');
+        } else {
+            archDiagram.innerHTML = '<p>No architecture diagram available.</p>';
+        }
+    } else {
+        // No project details available
+        document.getElementById('frontend-stack').innerHTML = '<span class="no-screenshots">No data available</span>';
+        document.getElementById('frontend-description').textContent = 'No data available';
+        document.getElementById('frontend-screenshots-section').style.display = 'none';
+        document.getElementById('backend-stack').innerHTML = '<span class="no-screenshots">No data available</span>';
+        document.getElementById('backend-description').textContent = 'No data available';
+        document.getElementById('models-section').style.display = 'none';
+        document.getElementById('architecture-diagram').innerHTML = '<p>No architecture diagram available.</p>';
+    }
 
     // Show modal
     modal.classList.add('active');
@@ -419,6 +566,16 @@ document.head.appendChild(style);
 // Initialize
 // ===================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load project details first
+    await loadProjectDetails();
+
+    // Initialize Mermaid
+    initMermaid();
+
+    // Setup modal tabs
+    setupModalTabs();
+
+    // Load projects from GitHub
     loadProjects();
 });

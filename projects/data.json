@@ -1,0 +1,155 @@
+{
+  "AgenticLabeling": {
+    "summary": "AI-powered automatic labeling platform with microservices architecture",
+    "frontend": {
+      "stack": ["Streamlit", "Label Studio"],
+      "screenshots": [],
+      "description": "Streamlit 기반 라벨 검증 UI, Label Studio Lite 통합"
+    },
+    "backend": {
+      "stack": ["FastAPI", "PyTorch", "Transformers", "ChromaDB", "SQLite", "Docker"],
+      "description": "마이크로서비스 아키텍처 - Gateway가 Detection, Segmentation, Classification Agent를 오케스트레이션",
+      "architecture": {
+        "type": "mermaid",
+        "code": "graph TD\n    GW[Gateway :8000] --> DA[Detection Agent :8001]\n    GW --> SA[Segmentation Agent :8002]\n    GW --> CA[Classification Agent :8003]\n    GW --> TA[Training Agent :8005]\n    DA --> OR[(Object Registry :8010)]\n    SA --> OR\n    CA --> OR\n    OR --> |SQLite| DB[(Metadata)]\n    OR --> |ChromaDB| VDB[(Vectors)]"
+      }
+    },
+    "models": ["Florence-2", "SAM2", "DINOv2", "YOLOv8"]
+  },
+  "cc-initializer": {
+    "summary": "Claude Code configuration framework for AI-assisted development workflows",
+    "frontend": {
+      "stack": [],
+      "screenshots": [],
+      "description": "CLI 기반 도구, UI 없음"
+    },
+    "backend": {
+      "stack": ["Bash", "JSON", "Markdown"],
+      "description": "Skills, Agents, Hooks, Commands를 통한 개발 워크플로우 자동화",
+      "architecture": {
+        "type": "mermaid",
+        "code": "graph TD\n    SK[Skills 22개] --> SET[settings.json]\n    AG[Agents 20개] --> SET\n    HK[Hooks 5개] --> SET\n    CMD[Commands 6개] --> SET\n    SET --> DOCS[docs/ standards]\n    DOCS --> PRD[PRD.md]\n    DOCS --> TECH[TECH-SPEC.md]\n    DOCS --> PROG[PROGRESS.md]"
+      }
+    },
+    "models": []
+  },
+  "DXTnavis": {
+    "summary": "Navisworks 2025 BIM Property Viewer & AWP 4D Automation Plugin",
+    "frontend": {
+      "stack": ["WPF", "XAML", ".NET Framework"],
+      "screenshots": [],
+      "description": "Navisworks 플러그인 UI - Property Viewer, TimeLiner 자동화 패널"
+    },
+    "backend": {
+      "stack": ["C#", ".NET Framework", "Navisworks API"],
+      "description": "CSV 데이터를 TimeLiner 4D 시뮬레이션으로 변환하는 파이프라인",
+      "architecture": {
+        "type": "mermaid",
+        "code": "graph LR\n    CSV[CSV Data] --> Parser[CSV Parser]\n    Parser --> Mapper[Property Mapper]\n    Mapper --> TL[TimeLiner API]\n    TL --> SIM[4D Simulation]\n    NW[Navisworks Model] --> Props[Property Viewer]\n    Props --> Export[Export Module]"
+      }
+    },
+    "models": []
+  },
+  "AgenticREVIT": {
+    "summary": "Agentic Ontology System for Autodesk REVIT v2025 using LangGraph",
+    "frontend": {
+      "stack": ["WPF", "XAML", ".NET Framework"],
+      "screenshots": [],
+      "description": "REVIT Add-in UI 패널"
+    },
+    "backend": {
+      "stack": ["C#", "Python", "LangGraph", "Revit API"],
+      "description": "LangGraph 기반 에이전트가 REVIT 모델을 분석하고 자동화 태스크 수행",
+      "architecture": {
+        "type": "mermaid",
+        "code": "graph TD\n    UI[REVIT Add-in] --> API[Revit API]\n    API --> Agent[LangGraph Agent]\n    Agent --> Ontology[BIM Ontology]\n    Agent --> LLM[OpenAI LLM]\n    Ontology --> Tasks[Automation Tasks]\n    Tasks --> API"
+      }
+    },
+    "models": ["OpenAI GPT"]
+  },
+  "algo-quant": {
+    "summary": "Quantitative investment automation with Fama-French multi-factor models",
+    "frontend": {
+      "stack": ["Dash", "Plotly", "Streamlit"],
+      "screenshots": [],
+      "description": "Dash 대시보드 - Live Analyzer, Factor Analysis, Backtest 결과 시각화"
+    },
+    "backend": {
+      "stack": ["Python", "pandas", "scikit-learn", "hmmlearn", "yfinance"],
+      "description": "데이터 수집 → 팩터 분석 → 레짐 분류 → 백테스트 파이프라인",
+      "architecture": {
+        "type": "mermaid",
+        "code": "graph TD\n    DATA[Data Collection] --> |yfinance| PRICE[Price Data]\n    DATA --> |Kenneth French| FACTOR[Factor Data]\n    PRICE --> FA[Factor Analysis]\n    FACTOR --> FA\n    FA --> |FF3/FF5| REGIME[Regime Classification]\n    REGIME --> |HMM| STRATEGY[Strategy Engine]\n    STRATEGY --> BT[Backtest Engine]\n    BT --> METRICS[Performance Metrics]"
+      }
+    },
+    "models": ["HMM (Hidden Markov Model)", "Fama-French 5-Factor"]
+  },
+  "palantir-stock": {
+    "summary": "Web search based company information collection and stock analysis agent",
+    "frontend": {
+      "stack": [],
+      "screenshots": [],
+      "description": "CLI 기반, 웹 대시보드 계획 중"
+    },
+    "backend": {
+      "stack": ["Python", "LangGraph", "Neo4j", "ChromaDB", "FastAPI", "yfinance"],
+      "description": "Graph RAG + Vector RAG 하이브리드 검색, 기업 지식 그래프 구축",
+      "architecture": {
+        "type": "mermaid",
+        "code": "graph TD\n    QUERY[User Query] --> ORCH[LangGraph Orchestrator]\n    ORCH --> SEARCH[Search Agent]\n    ORCH --> ANALYSIS[Analysis Agent]\n    ORCH --> STOCK[Stock Agent]\n    SEARCH --> VDB[(ChromaDB)]\n    ANALYSIS --> GDB[(Neo4j)]\n    STOCK --> |yfinance| MARKET[Market Data]\n    VDB --> HYBRID[Hybrid Retrieval]\n    GDB --> HYBRID\n    HYBRID --> LLM[LLM Response]"
+      }
+    },
+    "models": ["OpenAI GPT", "Graph RAG"]
+  },
+  "med-vision": {
+    "summary": "Medical image AI research project using AgenticLabeling microservices",
+    "frontend": {
+      "stack": ["Streamlit"],
+      "screenshots": [],
+      "description": "AgenticLabeling의 Label Studio UI 활용"
+    },
+    "backend": {
+      "stack": ["Python", "FastAPI", "PyTorch", "MLflow"],
+      "description": "AgenticLabeling 시스템과 통합하여 의료 영상 자동 라벨링 및 모델 학습",
+      "architecture": {
+        "type": "mermaid",
+        "code": "graph TD\n    RAW[Medical Images] --> GW[AgenticLabeling Gateway]\n    GW --> DET[Florence-2 Detection]\n    GW --> SEG[SAM2 Segmentation]\n    DET --> REG[(Object Registry)]\n    SEG --> REG\n    REG --> EXPORT[Dataset Export]\n    EXPORT --> TRAIN[YOLO Training]\n    TRAIN --> MLFLOW[MLflow Tracking]"
+      }
+    },
+    "models": ["Florence-2", "SAM2", "DINOv2", "YOLOv8"]
+  },
+  "binance-algo-trading": {
+    "summary": "Binance algorithmic trading system with backtesting and automated execution",
+    "frontend": {
+      "stack": ["Next.js 14", "React", "TailwindCSS", "shadcn/ui", "Zustand"],
+      "screenshots": [],
+      "description": "실시간 트레이딩 대시보드, 백테스트 결과 시각화, 전략 관리 UI"
+    },
+    "backend": {
+      "stack": ["Python", "FastAPI", "Rust", "PostgreSQL", "TimescaleDB", "Redis"],
+      "description": "Python 전략 엔진 + Rust 초저지연 실행 엔진, Telegram 알림 통합",
+      "architecture": {
+        "type": "mermaid",
+        "code": "graph TD\n    UI[Next.js Dashboard] --> API[FastAPI Server :8000]\n    API --> STRAT[Strategy Engine]\n    API --> BT[Backtest Engine]\n    STRAT --> EXEC[Rust Execution Engine]\n    EXEC --> |WebSocket| BINANCE[Binance API]\n    STRAT --> DB[(PostgreSQL + TimescaleDB)]\n    API --> CACHE[(Redis)]\n    API --> TG[Telegram Bot]"
+      }
+    },
+    "models": ["XGBoost", "LightGBM"]
+  },
+  "student-manager": {
+    "summary": "Academy class management system with drag-and-drop schedule board",
+    "frontend": {
+      "stack": ["React 18", "TypeScript", "Vite", "TailwindCSS", "Zustand", "@dnd-kit"],
+      "screenshots": [],
+      "description": "시간표 매트릭스 보드, 드래그 앤 드롭 수업 이동, 실시간 상태 추적"
+    },
+    "backend": {
+      "stack": ["Firebase"],
+      "description": "Firebase 기반 실시간 데이터 동기화",
+      "architecture": {
+        "type": "mermaid",
+        "code": "graph TD\n    UI[React App] --> ZUSTAND[Zustand Store]\n    ZUSTAND --> FB[(Firebase)]\n    UI --> DND[@dnd-kit]\n    DND --> BOARD[Schedule Board]\n    BOARD --> |Subject x Time| MATRIX[Matrix View]\n    FB --> SYNC[Real-time Sync]"
+      }
+    },
+    "models": []
+  }
+}
