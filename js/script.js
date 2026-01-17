@@ -1,5 +1,5 @@
 /* ===================================
-   Portfolio JavaScript
+   Portfolio JavaScript - Portavia Style
    =================================== */
 
 // Configuration
@@ -7,15 +7,16 @@ const CONFIG = {
     githubUsername: 'tygwan',
     featuredProjects: [
         'AgenticLabeling',
+        'binance-algo-trading',
         'cc-initializer',
         'DXTnavis',
-        'AgenticREVIT',
-        'n8n'
+        'AgenticREVIT'
     ],
     experimentalProjects: [
         'algo-quant',
         'palantir-stock',
-        'med-vision'
+        'med-vision',
+        'student-manager'
     ],
     // Language colors (GitHub style)
     languageColors: {
@@ -30,11 +31,21 @@ const CONFIG = {
         'Rust': '#dea584',
         'Java': '#b07219',
         'default': '#B1ADA1'
+    },
+    // Project cover images (fallback gradients if no image)
+    projectCovers: {
+        'AgenticLabeling': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        'binance-algo-trading': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+        'cc-initializer': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+        'DXTnavis': 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+        'AgenticREVIT': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+        'algo-quant': 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+        'palantir-stock': 'linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)',
+        'med-vision': 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
+        'student-manager': 'linear-gradient(135deg, #fdcb6e 0%, #e17055 100%)',
+        'default': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
     }
 };
-
-// Store repos data for modal
-let reposData = [];
 
 // Store project details from data.json
 let projectDetailsData = {};
@@ -43,10 +54,8 @@ let projectDetailsData = {};
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 const nav = document.getElementById('nav');
-const projectsGrid = document.getElementById('projects-grid');
+const projectsTrack = document.getElementById('projects-track');
 const experimentalGrid = document.getElementById('experimental-grid');
-const modal = document.getElementById('project-modal');
-const modalClose = document.getElementById('modal-close');
 
 // ===================================
 // Navigation
@@ -94,6 +103,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ===================================
 // GitHub Projects
 // ===================================
+
+// Load project details from data.json
+async function loadProjectDetails() {
+    try {
+        const response = await fetch('projects/data.json');
+        if (response.ok) {
+            projectDetailsData = await response.json();
+        }
+    } catch (error) {
+        console.error('Error loading project details:', error);
+    }
+}
 
 // Fetch and display projects
 async function loadProjects() {
@@ -144,12 +165,11 @@ async function loadProjects() {
             return indexA - indexB;
         });
 
-        // Store all repos for modal use
-        reposData = [...featuredRepos, ...experimentalRepos];
+        // Display featured projects in horizontal scroll
+        displayFeaturedProjects(featuredRepos);
 
-        // Display both grids
-        displayProjects(featuredRepos, projectsGrid);
-        displayProjects(experimentalRepos, experimentalGrid, true);
+        // Display experimental projects in grid
+        displayExperimentalProjects(experimentalRepos);
 
     } catch (error) {
         console.error('Error loading projects:', error);
@@ -157,83 +177,125 @@ async function loadProjects() {
     }
 }
 
-// Display projects in grid
-function displayProjects(repos, gridElement, isExperimental = false) {
-    if (!gridElement) return;
+// Display featured projects in horizontal scroll track
+function displayFeaturedProjects(repos) {
+    if (!projectsTrack) return;
 
     if (repos.length === 0) {
-        gridElement.innerHTML = `
+        projectsTrack.innerHTML = `
             <div class="projects-loading">
-                <p>No ${isExperimental ? 'experimental' : 'featured'} projects found.</p>
+                <p>No featured projects found.</p>
             </div>
         `;
         return;
     }
 
-    gridElement.innerHTML = repos.map(repo => createProjectCard(repo, isExperimental)).join('');
-
-    // Add click event listeners to cards
-    gridElement.querySelectorAll('.project-card').forEach((card, index) => {
-        card.addEventListener('click', (e) => {
-            // Don't open modal if clicking on the GitHub link
-            if (e.target.closest('.project-link')) return;
-            openModal(repos[index]);
-        });
-    });
+    projectsTrack.innerHTML = repos.map(repo => createProjectCard(repo)).join('');
 }
 
-// Create project card HTML
-function createProjectCard(repo, isExperimental = false) {
-    const languageColor = CONFIG.languageColors[repo.language] || CONFIG.languageColors.default;
-    const description = repo.description || 'No description available';
-    const isFeatured = repo.name.toLowerCase() === 'cc-initializer' || repo.name.toLowerCase() === 'agenticlabeling';
+// Display experimental projects in grid
+function displayExperimentalProjects(repos) {
+    if (!experimentalGrid) return;
+
+    if (repos.length === 0) {
+        experimentalGrid.innerHTML = `
+            <div class="projects-loading">
+                <p>No experimental projects found.</p>
+            </div>
+        `;
+        return;
+    }
+
+    experimentalGrid.innerHTML = repos.map(repo => createExperimentalCard(repo)).join('');
+}
+
+// Create project card HTML (Portavia style - for featured projects)
+function createProjectCard(repo) {
+    const projectDetails = projectDetailsData[repo.name];
+    const summary = projectDetails?.summary || repo.description || 'No description available';
+    const coverStyle = CONFIG.projectCovers[repo.name] || CONFIG.projectCovers.default;
+
+    // Get tech stack for display
+    const frontendStack = projectDetails?.frontend?.stack || [];
+    const backendStack = projectDetails?.backend?.stack || [];
+    const allTech = [...frontendStack.slice(0, 2), ...backendStack.slice(0, 2)];
+    const techDisplay = allTech.slice(0, 4);
 
     return `
-        <article class="project-card${isFeatured ? ' featured' : ''}" data-repo="${repo.name}">
-            <div class="project-header">
-                <h3 class="project-title">${isFeatured ? '<span class="featured-badge">⭐</span> ' : ''}${repo.name}</h3>
-                <a href="${repo.html_url}" target="_blank" rel="noopener" class="project-link" aria-label="View on GitHub">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </a>
-            </div>
-            <p class="project-description">${escapeHtml(description)}</p>
-            <div class="project-meta">
-                ${repo.language ? `
-                    <span class="project-language">
-                        <span class="language-dot" style="background-color: ${languageColor}"></span>
-                        ${repo.language}
-                    </span>
-                ` : '<span></span>'}
-                <div class="project-stats">
-                    ${repo.stargazers_count > 0 ? `
-                        <span title="Stars">
-                            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                                <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/>
-                            </svg>
-                            ${repo.stargazers_count}
-                        </span>
-                    ` : ''}
-                    ${repo.forks_count > 0 ? `
-                        <span title="Forks">
-                            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                                <path d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"/>
-                            </svg>
-                            ${repo.forks_count}
-                        </span>
-                    ` : ''}
+        <article class="project-card">
+            <a href="${repo.html_url}" target="_blank" rel="noopener" class="project-card-link">
+                <div class="project-cover" style="background: ${coverStyle}">
+                    <div class="project-cover-overlay">
+                        <span class="view-project">View Project</span>
+                    </div>
                 </div>
-            </div>
+                <div class="project-content">
+                    <h3 class="project-title">${repo.name}</h3>
+                    <p class="project-summary">${escapeHtml(summary)}</p>
+                    ${techDisplay.length > 0 ? `
+                        <div class="project-tech">
+                            ${techDisplay.map(tech => `<span class="tech-badge">${escapeHtml(tech)}</span>`).join('')}
+                            ${allTech.length > 4 ? `<span class="tech-badge more">+${allTech.length - 4}</span>` : ''}
+                        </div>
+                    ` : ''}
+                    <div class="project-meta">
+                        <span class="project-language">
+                            <span class="language-dot" style="background-color: ${CONFIG.languageColors[repo.language] || CONFIG.languageColors.default}"></span>
+                            ${repo.language || 'N/A'}
+                        </span>
+                        <div class="project-stats">
+                            ${repo.stargazers_count > 0 ? `
+                                <span title="Stars">
+                                    <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+                                        <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/>
+                                    </svg>
+                                    ${repo.stargazers_count}
+                                </span>
+                            ` : ''}
+                            ${repo.forks_count > 0 ? `
+                                <span title="Forks">
+                                    <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+                                        <path d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"/>
+                                    </svg>
+                                    ${repo.forks_count}
+                                </span>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </article>
+    `;
+}
+
+// Create experimental project card (smaller, grid style)
+function createExperimentalCard(repo) {
+    const projectDetails = projectDetailsData[repo.name];
+    const summary = projectDetails?.summary || repo.description || 'No description available';
+    const coverStyle = CONFIG.projectCovers[repo.name] || CONFIG.projectCovers.default;
+
+    return `
+        <article class="experimental-card">
+            <a href="${repo.html_url}" target="_blank" rel="noopener" class="experimental-card-link">
+                <div class="experimental-cover" style="background: ${coverStyle}"></div>
+                <div class="experimental-content">
+                    <h4 class="experimental-title">${repo.name}</h4>
+                    <p class="experimental-summary">${escapeHtml(summary)}</p>
+                    <span class="experimental-language">
+                        <span class="language-dot" style="background-color: ${CONFIG.languageColors[repo.language] || CONFIG.languageColors.default}"></span>
+                        ${repo.language || 'N/A'}
+                    </span>
+                </div>
+            </a>
         </article>
     `;
 }
 
 // Display error message
 function displayError() {
-    if (!projectsGrid) return;
+    if (!projectsTrack) return;
 
-    projectsGrid.innerHTML = `
+    projectsTrack.innerHTML = `
         <div class="projects-loading">
             <p>Unable to load projects. Please try again later.</p>
             <a href="https://github.com/${CONFIG.githubUsername}" target="_blank" rel="noopener" class="btn btn-secondary mt-4">
@@ -251,280 +313,77 @@ function escapeHtml(text) {
 }
 
 // ===================================
-// Project Modal
+// Horizontal Scroll Enhancement
 // ===================================
 
-// Load project details from data.json
-async function loadProjectDetails() {
-    try {
-        const response = await fetch('projects/data.json');
-        if (response.ok) {
-            projectDetailsData = await response.json();
+function initHorizontalScroll() {
+    const scrollContainer = document.querySelector('.projects-scroll-container');
+    if (!scrollContainer) return;
+
+    // Enable smooth drag scrolling
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    scrollContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        scrollContainer.classList.add('grabbing');
+        startX = e.pageX - scrollContainer.offsetLeft;
+        scrollLeft = scrollContainer.scrollLeft;
+    });
+
+    scrollContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        scrollContainer.classList.remove('grabbing');
+    });
+
+    scrollContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        scrollContainer.classList.remove('grabbing');
+    });
+
+    scrollContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - scrollContainer.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        scrollContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Keyboard navigation
+    scrollContainer.setAttribute('tabindex', '0');
+    scrollContainer.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            scrollContainer.scrollBy({ left: -400, behavior: 'smooth' });
+        } else if (e.key === 'ArrowRight') {
+            scrollContainer.scrollBy({ left: 400, behavior: 'smooth' });
         }
-    } catch (error) {
-        console.error('Error loading project details:', error);
-    }
-}
-
-// Initialize Mermaid
-function initMermaid() {
-    if (typeof mermaid !== 'undefined') {
-        mermaid.initialize({
-            startOnLoad: false,
-            theme: 'neutral',
-            securityLevel: 'loose',
-            fontFamily: 'Inter, sans-serif'
-        });
-    }
-}
-
-// Render Mermaid diagram
-async function renderMermaidDiagram(code, containerId) {
-    if (typeof mermaid === 'undefined') return;
-
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    try {
-        const { svg } = await mermaid.render('mermaid-' + Date.now(), code);
-        container.innerHTML = svg;
-    } catch (error) {
-        console.error('Mermaid render error:', error);
-        container.innerHTML = '<p>Failed to render architecture diagram.</p>';
-    }
-}
-
-// Setup modal tabs
-function setupModalTabs() {
-    const tabs = document.querySelectorAll('.modal-tab');
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Remove active from all tabs and contents
-            tabs.forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
-
-            // Add active to clicked tab and corresponding content
-            tab.classList.add('active');
-            const tabId = tab.getAttribute('data-tab');
-            document.getElementById(`tab-${tabId}`)?.classList.add('active');
-        });
     });
 }
 
-// Populate tech stack tags
-function populateTechStack(containerId, stack) {
-    const container = document.getElementById(containerId);
-    if (!container || !stack || stack.length === 0) {
-        if (container) container.innerHTML = '<span class="no-screenshots">No tech stack specified</span>';
-        return;
-    }
+// ===================================
+// Tech Cloud Animation
+// ===================================
 
-    container.innerHTML = stack.map(tech =>
-        `<span class="tech-tag">${escapeHtml(tech)}</span>`
-    ).join('');
-}
+function initTechCloud() {
+    const techItems = document.querySelectorAll('.tech-item');
 
-// Populate models tags
-function populateModels(containerId, models) {
-    const container = document.getElementById(containerId);
-    const section = document.getElementById('models-section');
+    techItems.forEach((item, index) => {
+        // Stagger animation
+        item.style.animationDelay = `${index * 0.05}s`;
 
-    if (!models || models.length === 0) {
-        if (section) section.style.display = 'none';
-        return;
-    }
-
-    if (section) section.style.display = 'block';
-    if (container) {
-        container.innerHTML = models.map(model =>
-            `<span class="tech-tag model">${escapeHtml(model)}</span>`
-        ).join('');
-    }
-}
-
-// Populate screenshots
-function populateScreenshots(containerId, screenshots) {
-    const container = document.getElementById(containerId);
-    const section = document.getElementById('frontend-screenshots-section');
-
-    if (!screenshots || screenshots.length === 0) {
-        if (section) section.style.display = 'none';
-        return;
-    }
-
-    if (section) section.style.display = 'block';
-    if (container) {
-        container.innerHTML = screenshots.map(src =>
-            `<div class="screenshot-item"><img src="${escapeHtml(src)}" alt="Screenshot" loading="lazy"></div>`
-        ).join('');
-    }
-}
-
-// Open modal with project details
-async function openModal(repo) {
-    if (!modal) return;
-
-    const modalTitle = document.getElementById('modal-title');
-    const modalLanguage = document.getElementById('modal-language');
-    const modalDescription = document.getElementById('modal-description');
-    const modalStats = document.getElementById('modal-stats');
-    const modalReadme = document.getElementById('modal-readme');
-
-    // Set basic info
-    modalTitle.textContent = repo.name;
-    modalLanguage.textContent = repo.language || 'Unknown';
-    modalDescription.textContent = repo.description || 'No description available';
-
-    // Store URL for button click
-    currentRepoUrl = repo.html_url;
-
-    // Calculate development period
-    const createdDate = new Date(repo.created_at);
-    const updatedDate = new Date(repo.pushed_at || repo.updated_at);
-    const formatDate = (date) => {
-        return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'short' });
-    };
-
-    // Set stats
-    modalStats.innerHTML = `
-        <span class="modal-stat">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M4.75 0a.75.75 0 01.75.75V2h5V.75a.75.75 0 011.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0113.25 16H2.75A1.75 1.75 0 011 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 014.75 0zm0 3.5h8.5a.25.25 0 01.25.25V6h-11V3.75a.25.25 0 01.25-.25h2zm-2.25 4v6.75c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25V7.5h-11z"/>
-            </svg>
-            ${formatDate(createdDate)} ~ ${formatDate(updatedDate)}
-        </span>
-        <span class="modal-stat">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/>
-            </svg>
-            ${repo.stargazers_count} Stars
-        </span>
-        <span class="modal-stat">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"/>
-            </svg>
-            ${repo.forks_count} Forks
-        </span>
-    `;
-
-    // Reset to Overview tab
-    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
-    document.querySelector('.modal-tab[data-tab="overview"]')?.classList.add('active');
-    document.getElementById('tab-overview')?.classList.add('active');
-
-    // Loading state for README
-    modalReadme.innerHTML = `
-        <div class="loading-spinner"></div>
-        <p style="text-align: center;">Loading README...</p>
-    `;
-
-    // Populate project details from data.json
-    const projectDetails = projectDetailsData[repo.name];
-    if (projectDetails) {
-        // Frontend tab
-        populateTechStack('frontend-stack', projectDetails.frontend?.stack);
-        document.getElementById('frontend-description').textContent =
-            projectDetails.frontend?.description || 'No description available';
-        populateScreenshots('frontend-screenshots', projectDetails.frontend?.screenshots);
-
-        // Backend tab
-        populateTechStack('backend-stack', projectDetails.backend?.stack);
-        document.getElementById('backend-description').textContent =
-            projectDetails.backend?.description || 'No description available';
-        populateModels('models-stack', projectDetails.models);
-
-        // Architecture tab
-        const archDiagram = document.getElementById('architecture-diagram');
-        if (projectDetails.backend?.architecture?.type === 'mermaid') {
-            await renderMermaidDiagram(projectDetails.backend.architecture.code, 'architecture-diagram');
-        } else {
-            archDiagram.innerHTML = '<p>No architecture diagram available.</p>';
-        }
-    } else {
-        // No project details available
-        document.getElementById('frontend-stack').innerHTML = '<span class="no-screenshots">No data available</span>';
-        document.getElementById('frontend-description').textContent = 'No data available';
-        document.getElementById('frontend-screenshots-section').style.display = 'none';
-        document.getElementById('backend-stack').innerHTML = '<span class="no-screenshots">No data available</span>';
-        document.getElementById('backend-description').textContent = 'No data available';
-        document.getElementById('models-section').style.display = 'none';
-        document.getElementById('architecture-diagram').innerHTML = '<p>No architecture diagram available.</p>';
-    }
-
-    // Show modal
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-
-    // Fetch README
-    try {
-        const readmeResponse = await fetch(
-            `https://api.github.com/repos/${CONFIG.githubUsername}/${repo.name}/readme`,
-            {
-                headers: {
-                    'Accept': 'application/vnd.github.v3.raw'
-                }
-            }
-        );
-
-        if (readmeResponse.ok) {
-            const readmeContent = await readmeResponse.text();
-            modalReadme.innerHTML = formatReadme(readmeContent);
-        } else {
-            modalReadme.innerHTML = '<p>No README available for this project.</p>';
-        }
-    } catch (error) {
-        console.error('Error fetching README:', error);
-        modalReadme.innerHTML = '<p>Unable to load README.</p>';
-    }
-}
-
-// Close modal
-function closeModal() {
-    if (!modal) return;
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-// Format README using marked.js
-function formatReadme(markdown) {
-    if (typeof marked !== 'undefined') {
-        // Configure marked for security
-        marked.setOptions({
-            breaks: true,
-            gfm: true
+        // Hover effect with random subtle movement
+        item.addEventListener('mouseenter', () => {
+            const randomX = (Math.random() - 0.5) * 4;
+            const randomY = (Math.random() - 0.5) * 4;
+            item.style.transform = `translate(${randomX}px, ${randomY}px) scale(1.1)`;
         });
-        return marked.parse(markdown);
-    }
-    // Fallback: just escape and show as preformatted
-    return '<pre>' + escapeHtml(markdown) + '</pre>';
+
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = '';
+        });
+    });
 }
-
-// Store current repo URL for the button
-let currentRepoUrl = '';
-
-// Modal event listeners
-modalClose?.addEventListener('click', closeModal);
-
-modal?.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        closeModal();
-    }
-});
-
-// View Repository button click handler
-document.getElementById('modal-repo-link')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (currentRepoUrl) {
-        window.open(currentRepoUrl, '_blank', 'noopener');
-    }
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal?.classList.contains('active')) {
-        closeModal();
-    }
-});
 
 // ===================================
 // Intersection Observer for Animations
@@ -559,6 +418,12 @@ style.textContent = `
         opacity: 1 !important;
         transform: translateY(0) !important;
     }
+    .projects-scroll-container.grabbing {
+        cursor: grabbing;
+    }
+    .projects-scroll-container.grabbing .project-card {
+        pointer-events: none;
+    }
 `;
 document.head.appendChild(style);
 
@@ -570,12 +435,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Load project details first
     await loadProjectDetails();
 
-    // Initialize Mermaid
-    initMermaid();
-
-    // Setup modal tabs
-    setupModalTabs();
-
     // Load projects from GitHub
     loadProjects();
+
+    // Initialize horizontal scroll
+    initHorizontalScroll();
+
+    // Initialize tech cloud
+    initTechCloud();
 });
