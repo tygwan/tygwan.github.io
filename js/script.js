@@ -84,18 +84,25 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Smooth scroll for anchor links
+// Smooth scroll for anchor links (exclude external links and modal links)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const navHeight = nav?.offsetHeight || 0;
-            const targetPosition = target.offsetTop - navHeight;
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+        // Skip if it's an external link or has dynamic href
+        if (this.target === '_blank' || this.id === 'modal-github-link') return;
+
+        const href = this.getAttribute('href');
+        // Only handle internal anchor links (not just "#")
+        if (href && href.length > 1) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                const navHeight = nav?.offsetHeight || 0;
+                const targetPosition = target.offsetTop - navHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
         }
     });
 });
