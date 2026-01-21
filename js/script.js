@@ -477,18 +477,123 @@ const modalModels = document.getElementById('modal-models');
 const modalModelsSection = document.getElementById('modal-models-section');
 const modalGithubLink = document.getElementById('modal-github-link');
 
-function openProjectModal(projectName) {
+// Cache for fetched README data
+const readmeCache = {};
+
+// Known tech keywords for extraction
+const TECH_KEYWORDS = {
+    frontend: ['React', 'Vue', 'Angular', 'Next.js', 'Nuxt', 'Svelte', 'TypeScript', 'JavaScript', 'TailwindCSS', 'Sass', 'SCSS', 'HTML', 'CSS', 'Vite', 'Webpack', 'Redux', 'Zustand', 'MobX'],
+    backend: ['Node.js', 'Express', 'FastAPI', 'Django', 'Flask', 'Spring', 'NestJS', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'GraphQL', 'REST', 'Docker', 'Kubernetes', 'AWS', 'GCP', 'Firebase'],
+    ai: ['PyTorch', 'TensorFlow', 'OpenAI', 'GPT', 'BERT', 'Transformers', 'YOLO', 'SAM', 'Florence', 'LangChain', 'LangGraph', 'Hugging Face', 'scikit-learn', 'pandas', 'numpy'],
+    languages: ['Python', 'JavaScript', 'TypeScript', 'Rust', 'Go', 'Java', 'C#', 'C++', 'Ruby', 'PHP', 'Swift', 'Kotlin']
+};
+
+// Fetch and parse README from GitHub
+async function fetchReadmeData(owner, repoName) {
+    if (readmeCache[repoName]) {
+        return readmeCache[repoName];
+    }
+
+    try {
+        // Fetch README via GitHub API
+        const response = await fetch(`https://api.github.com/repos/${owner}/${repoName}/readme`, {
+            headers: { 'Accept': 'application/vnd.github.v3.raw' }
+        });
+
+        if (!response.ok) return null;
+
+        const readmeContent = await response.text();
+        const extractedData = parseReadme(readmeContent);
+        readmeCache[repoName] = extractedData;
+        return extractedData;
+    } catch (error) {
+        console.error(`Failed to fetch README for ${repoName}:`, error);
+        return null;
+    }
+}
+
+// Parse README content to extract tech stack
+function parseReadme(content) {
+    const result = {
+        techStack: [],
+        summary: null
+    };
+
+    const contentLower = content.toLowerCase();
+
+    // Extract tech stack by matching known keywords
+    const allTech = [...TECH_KEYWORDS.frontend, ...TECH_KEYWORDS.backend, ...TECH_KEYWORDS.ai, ...TECH_KEYWORDS.languages];
+
+    allTech.forEach(tech => {
+        const regex = new RegExp(`\\b${tech.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+        if (regex.test(content)) {
+            result.techStack.push(tech);
+        }
+    });
+
+    // Try to extract summary from first paragraph after title
+    const lines = content.split('\n').filter(line => line.trim());
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        // Skip badges, titles, and empty lines
+        if (line.startsWith('#') || line.startsWith('!') || line.startsWith('[') || line.startsWith('<')) continue;
+        if (line.length > 20 && line.length < 300) {
+            result.summary = line;
+            break;
+        }
+    }
+
+    return result;
+}
+
+// Categorize tech stack
+function categorizeTech(techStack) {
+    const frontend = techStack.filter(t => TECH_KEYWORDS.frontend.some(k => k.toLowerCase() === t.toLowerCase()));
+    const backend = techStack.filter(t => TECH_KEYWORDS.backend.some(k => k.toLowerCase() === t.toLowerCase()));
+    const ai = techStack.filter(t => TECH_KEYWORDS.ai.some(k => k.toLowerCase() === t.toLowerCase()));
+
+    return { frontend, backend, ai };
+}
+
+async function openProjectModal(projectName) {
     const repo = reposData[projectName];
-    const details = projectDetailsData[projectName];
+    let details = projectDetailsData[projectName];
 
     if (!repo) return;
 
-    // Set title and summary
+    // Show modal immediately with loading state if no details
     modalTitle.textContent = repo.name;
-    modalSummary.textContent = details?.summary || repo.description || 'No description available';
-
-    // Set GitHub link
     modalGithubLink.href = repo.html_url;
+
+    // If no details in data.json, try to fetch from README
+    if (!details || (!details.frontend?.stack?.length && !details.backend?.stack?.length)) {
+        modalSummary.textContent = repo.description || 'Loading...';
+        modalTechGrid.innerHTML = '<p class="modal-tech-description">Loading tech stack from README...</p>';
+        modalArchitectureSection.style.display = 'none';
+        modalModelsSection.style.display = 'none';
+
+        // Show modal first
+        projectModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Fetch README data
+        const readmeData = await fetchReadmeData(CONFIG.githubUsername, repo.name);
+
+        if (readmeData) {
+            const categorized = categorizeTech(readmeData.techStack);
+
+            // Create dynamic details
+            details = {
+                summary: readmeData.summary || repo.description,
+                frontend: { stack: categorized.frontend },
+                backend: { stack: categorized.backend },
+                models: categorized.ai
+            };
+        }
+    }
+
+    // Set summary
+    modalSummary.textContent = details?.summary || repo.description || 'No description available';
 
     // Build tech stack section
     let techHtml = '';
@@ -541,9 +646,11 @@ function openProjectModal(projectName) {
         modalModelsSection.style.display = 'none';
     }
 
-    // Show modal
-    projectModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    // Show modal (if not already shown during loading)
+    if (!projectModal.classList.contains('active')) {
+        projectModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeProjectModal() {
