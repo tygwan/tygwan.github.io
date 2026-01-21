@@ -84,12 +84,9 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Smooth scroll for anchor links (exclude external links and modal links)
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Smooth scroll for anchor links (exclude modal links from selection)
+document.querySelectorAll('a[href^="#"]:not(#modal-github-link)').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        // Skip if it's an external link or has dynamic href
-        if (this.target === '_blank' || this.id === 'modal-github-link') return;
-
         const href = this.getAttribute('href');
         // Only handle internal anchor links (not just "#")
         if (href && href.length > 1) {
