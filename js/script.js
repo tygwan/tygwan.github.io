@@ -325,6 +325,9 @@ function escapeHtml(text) {
 // Horizontal Scroll Enhancement
 // ===================================
 
+// Track if dragging occurred to prevent click after drag
+let wasDragging = false;
+
 function initHorizontalScroll() {
     const scrollContainer = document.querySelector('.projects-scroll-container');
     if (!scrollContainer) return;
@@ -339,6 +342,7 @@ function initHorizontalScroll() {
     scrollContainer.addEventListener('mousedown', (e) => {
         isDown = true;
         isDragging = false;
+        wasDragging = false;
         startX = e.pageX - scrollContainer.offsetLeft;
         scrollLeft = scrollContainer.scrollLeft;
     });
@@ -350,6 +354,11 @@ function initHorizontalScroll() {
     });
 
     scrollContainer.addEventListener('mouseup', () => {
+        if (isDragging) {
+            wasDragging = true;
+            // Reset wasDragging after a short delay to allow click event to check it
+            setTimeout(() => { wasDragging = false; }, 10);
+        }
         isDown = false;
         isDragging = false;
         scrollContainer.classList.remove('grabbing');
@@ -557,6 +566,9 @@ document.addEventListener('keydown', (e) => {
 function initProjectCardClicks() {
     // Featured projects
     projectsTrack?.addEventListener('click', (e) => {
+        // Ignore click if it was a drag
+        if (wasDragging) return;
+
         const card = e.target.closest('.project-card');
         if (card) {
             const projectName = card.dataset.project;
