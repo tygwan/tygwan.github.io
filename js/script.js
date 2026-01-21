@@ -209,8 +209,14 @@ function displayExperimentalProjects(repos) {
     experimentalGrid.innerHTML = repos.map(repo => createExperimentalCard(repo)).join('');
 }
 
+// Store repo data for modal
+let reposData = {};
+
 // Create project card HTML (Portavia style - for featured projects)
 function createProjectCard(repo) {
+    // Store repo data for modal access
+    reposData[repo.name] = repo;
+
     const projectDetails = projectDetailsData[repo.name];
     const summary = projectDetails?.summary || repo.description || 'No description available';
     const coverStyle = CONFIG.projectCovers[repo.name] || CONFIG.projectCovers.default;
@@ -222,11 +228,11 @@ function createProjectCard(repo) {
     const techDisplay = allTech.slice(0, 4);
 
     return `
-        <article class="project-card">
-            <a href="${repo.html_url}" target="_blank" rel="noopener" class="project-card-link">
+        <article class="project-card" data-project="${repo.name}" role="button" tabindex="0">
+            <div class="project-card-link">
                 <div class="project-cover" style="background: ${coverStyle}">
                     <div class="project-cover-overlay">
-                        <span class="view-project">View Project</span>
+                        <span class="view-project">View Details</span>
                     </div>
                 </div>
                 <div class="project-content">
@@ -263,20 +269,23 @@ function createProjectCard(repo) {
                         </div>
                     </div>
                 </div>
-            </a>
+            </div>
         </article>
     `;
 }
 
 // Create experimental project card (smaller, grid style)
 function createExperimentalCard(repo) {
+    // Store repo data for modal access
+    reposData[repo.name] = repo;
+
     const projectDetails = projectDetailsData[repo.name];
     const summary = projectDetails?.summary || repo.description || 'No description available';
     const coverStyle = CONFIG.projectCovers[repo.name] || CONFIG.projectCovers.default;
 
     return `
-        <article class="experimental-card">
-            <a href="${repo.html_url}" target="_blank" rel="noopener" class="experimental-card-link">
+        <article class="experimental-card" data-project="${repo.name}" role="button" tabindex="0">
+            <div class="experimental-card-link">
                 <div class="experimental-cover" style="background: ${coverStyle}"></div>
                 <div class="experimental-content">
                     <h4 class="experimental-title">${repo.name}</h4>
@@ -286,7 +295,7 @@ function createExperimentalCard(repo) {
                         ${repo.language || 'N/A'}
                     </span>
                 </div>
-            </a>
+            </div>
         </article>
     `;
 }
@@ -322,32 +331,45 @@ function initHorizontalScroll() {
 
     // Enable smooth drag scrolling
     let isDown = false;
+    let isDragging = false;
     let startX;
     let scrollLeft;
+    const dragThreshold = 5; // Minimum pixels to consider as drag
 
     scrollContainer.addEventListener('mousedown', (e) => {
         isDown = true;
-        scrollContainer.classList.add('grabbing');
+        isDragging = false;
         startX = e.pageX - scrollContainer.offsetLeft;
         scrollLeft = scrollContainer.scrollLeft;
     });
 
     scrollContainer.addEventListener('mouseleave', () => {
         isDown = false;
+        isDragging = false;
         scrollContainer.classList.remove('grabbing');
     });
 
     scrollContainer.addEventListener('mouseup', () => {
         isDown = false;
+        isDragging = false;
         scrollContainer.classList.remove('grabbing');
     });
 
     scrollContainer.addEventListener('mousemove', (e) => {
         if (!isDown) return;
-        e.preventDefault();
         const x = e.pageX - scrollContainer.offsetLeft;
         const walk = (x - startX) * 1.5;
-        scrollContainer.scrollLeft = scrollLeft - walk;
+
+        // Only start dragging after threshold is exceeded
+        if (!isDragging && Math.abs(x - startX) > dragThreshold) {
+            isDragging = true;
+            scrollContainer.classList.add('grabbing');
+        }
+
+        if (isDragging) {
+            e.preventDefault();
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        }
     });
 
     // Keyboard navigation
@@ -428,6 +450,163 @@ style.textContent = `
 document.head.appendChild(style);
 
 // ===================================
+// Project Modal
+// ===================================
+
+const projectModal = document.getElementById('project-modal');
+const modalClose = document.getElementById('modal-close');
+const modalTitle = document.getElementById('modal-title');
+const modalSummary = document.getElementById('modal-summary');
+const modalTechGrid = document.getElementById('modal-tech-grid');
+const modalArchitecture = document.getElementById('modal-architecture');
+const modalArchitectureSection = document.getElementById('modal-architecture-section');
+const modalModels = document.getElementById('modal-models');
+const modalModelsSection = document.getElementById('modal-models-section');
+const modalGithubLink = document.getElementById('modal-github-link');
+
+function openProjectModal(projectName) {
+    const repo = reposData[projectName];
+    const details = projectDetailsData[projectName];
+
+    if (!repo) return;
+
+    // Set title and summary
+    modalTitle.textContent = repo.name;
+    modalSummary.textContent = details?.summary || repo.description || 'No description available';
+
+    // Set GitHub link
+    modalGithubLink.href = repo.html_url;
+
+    // Build tech stack section
+    let techHtml = '';
+
+    if (details?.frontend?.stack?.length > 0) {
+        techHtml += `
+            <div class="modal-tech-category">
+                <span class="modal-tech-label">Frontend</span>
+                <div class="modal-tech-items">
+                    ${details.frontend.stack.map(tech => `<span class="modal-tech-item">${escapeHtml(tech)}</span>`).join('')}
+                </div>
+                ${details.frontend.description ? `<p class="modal-tech-description">${escapeHtml(details.frontend.description)}</p>` : ''}
+            </div>
+        `;
+    }
+
+    if (details?.backend?.stack?.length > 0) {
+        techHtml += `
+            <div class="modal-tech-category">
+                <span class="modal-tech-label">Backend</span>
+                <div class="modal-tech-items">
+                    ${details.backend.stack.map(tech => `<span class="modal-tech-item">${escapeHtml(tech)}</span>`).join('')}
+                </div>
+                ${details.backend.description ? `<p class="modal-tech-description">${escapeHtml(details.backend.description)}</p>` : ''}
+            </div>
+        `;
+    }
+
+    if (!techHtml) {
+        techHtml = `<p class="modal-tech-description">Tech stack information not available.</p>`;
+    }
+
+    modalTechGrid.innerHTML = techHtml;
+
+    // Build architecture section
+    if (details?.backend?.architecture?.code) {
+        modalArchitectureSection.style.display = 'block';
+        modalArchitecture.textContent = details.backend.architecture.code;
+    } else {
+        modalArchitectureSection.style.display = 'none';
+    }
+
+    // Build models section
+    if (details?.models?.length > 0) {
+        modalModelsSection.style.display = 'block';
+        modalModels.innerHTML = details.models.map(model =>
+            `<span class="modal-model-tag">${escapeHtml(model)}</span>`
+        ).join('');
+    } else {
+        modalModelsSection.style.display = 'none';
+    }
+
+    // Show modal
+    projectModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProjectModal() {
+    projectModal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Modal event listeners
+modalClose?.addEventListener('click', closeProjectModal);
+
+projectModal?.addEventListener('click', (e) => {
+    if (e.target === projectModal) {
+        closeProjectModal();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && projectModal?.classList.contains('active')) {
+        closeProjectModal();
+    }
+});
+
+// Project card click handlers (using event delegation)
+function initProjectCardClicks() {
+    // Featured projects
+    projectsTrack?.addEventListener('click', (e) => {
+        const card = e.target.closest('.project-card');
+        if (card) {
+            const projectName = card.dataset.project;
+            if (projectName) {
+                openProjectModal(projectName);
+            }
+        }
+    });
+
+    // Keyboard support for featured projects
+    projectsTrack?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            const card = e.target.closest('.project-card');
+            if (card) {
+                e.preventDefault();
+                const projectName = card.dataset.project;
+                if (projectName) {
+                    openProjectModal(projectName);
+                }
+            }
+        }
+    });
+
+    // Experimental projects
+    experimentalGrid?.addEventListener('click', (e) => {
+        const card = e.target.closest('.experimental-card');
+        if (card) {
+            const projectName = card.dataset.project;
+            if (projectName) {
+                openProjectModal(projectName);
+            }
+        }
+    });
+
+    // Keyboard support for experimental projects
+    experimentalGrid?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            const card = e.target.closest('.experimental-card');
+            if (card) {
+                e.preventDefault();
+                const projectName = card.dataset.project;
+                if (projectName) {
+                    openProjectModal(projectName);
+                }
+            }
+        }
+    });
+}
+
+// ===================================
 // Initialize
 // ===================================
 
@@ -443,4 +622,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Initialize tech cloud
     initTechCloud();
+
+    // Initialize project card click handlers
+    initProjectCardClicks();
 });
