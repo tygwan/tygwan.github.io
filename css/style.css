@@ -1820,3 +1820,117 @@ section {
         padding: 16px;
     }
 }
+
+/* ===================================
+   Portfolio Sites Section
+   =================================== */
+
+.portfolio-sites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.portfolio-site-card {
+    background: var(--claude-white);
+    border: 1px solid var(--claude-pampas);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.portfolio-site-card:hover {
+    border-color: var(--claude-burnt-sienna);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.portfolio-site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 12px;
+}
+
+.portfolio-site-header h4 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--claude-ironstone);
+}
+
+.site-badge {
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.site-badge:where([class*="production"]) {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.site-badge:where([class*="active"]) {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.portfolio-site-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--claude-granite);
+    margin: 0;
+}
+
+.portfolio-site-projects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.portfolio-site-projects span {
+    padding: 4px 10px;
+    background: var(--claude-zircon);
+    border-radius: 6px;
+    color: var(--claude-ironstone);
+}
+
+.portfolio-site-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--claude-pampas);
+}
+
+.portfolio-site-tech span {
+    padding: 4px 10px;
+    background: var(--claude-burnt-sienna);
+    color: white;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .portfolio-sites-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .portfolio-site-card {
+        padding: 20px;
+    }
+}

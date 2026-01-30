@@ -151,5 +151,64 @@
       }
     },
     "models": []
+  },
+  "_external_portfolios": {
+    "n8n-automation": {
+      "type": "external",
+      "url": "https://tygwan.github.io/n8n/",
+      "summary": "n8n AI Automation Portfolio - Interactive workflow visualization with React Flow",
+      "thumbnail": "/assets/n8n-thumb.png",
+      "tech": ["n8n", "Astro", "React Flow", "OpenAI", "Telegram", "Alpha Vantage"],
+      "status": "production",
+      "projects": [
+        {
+          "name": "Stock Tracking System",
+          "status": "production",
+          "description": "멀티 소스 수집 + AI 인사이트 + 텔레그램 알림"
+        },
+        {
+          "name": "Virality - TikTok Marketing",
+          "status": "paused",
+          "description": "트렌드 탐지 → 수익화 → 정산 자동화"
+        },
+        {
+          "name": "Media Automation",
+          "status": "planning",
+          "description": "리서치 → 콘텐츠 생성 → 멀티 플랫폼 배포"
+        }
+      ],
+      "highlights": [
+        "Interactive React Flow workflow visualization",
+        "Bilingual (KR/EN) support",
+        "Real-time workflow parsing from n8n JSON",
+        "Custom node types: Trigger, AI, Code, Logic, HTTP, Integration"
+      ]
+    },
+    "physical-unity": {
+      "type": "external",
+      "url": "https://tygwan.github.io/physical-unity/",
+      "summary": "Unity Physics Simulation & Game Development Portfolio",
+      "thumbnail": "/assets/physical-unity-thumb.png",
+      "tech": ["Unity", "C#", "Physics Engine"],
+      "status": "production",
+      "highlights": [
+        "Real-time physics simulation",
+        "Interactive game mechanics",
+        "Custom physics engine integration"
+      ]
+    },
+    "ai-master-class": {
+      "type": "external",
+      "url": "https://tygwan.github.io/ai-master-class/",
+      "summary": "AI Education Platform & Learning Resources",
+      "thumbnail": "/assets/ai-master-class-thumb.png",
+      "tech": ["AI/ML", "Educational Content", "Interactive Tutorials"],
+      "status": "active",
+      "highlights": [
+        "Comprehensive AI curriculum",
+        "Hands-on coding exercises",
+        "Real-world AI applications"
+      ]
+    }
   }
 }
