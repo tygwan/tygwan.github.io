@@ -1,0 +1,622 @@
+/* ===================================
+   Resume Page Stylesheet
+   Based on hyunseob reference layout
+   + tygwan-theme design tokens
+   =================================== */
+
+/* --- Pretendard Font --- */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: var(--text-primary);
+    background: #fff;
+    line-height: 1.7;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+
+a {
+    color: var(--color-accent-700);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--color-accent-600);
+    text-decoration: underline;
+}
+
+/* --- Container --- */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+}
+
+/* --- Back Link --- */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-bottom: 48px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--color-accent-700);
+    background: var(--color-accent-100);
+    text-decoration: none;
+}
+
+.back-link svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* --- Section --- */
+section {
+    margin-bottom: 56px;
+}
+
+section:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Headings --- */
+h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--color-primary-200);
+}
+
+h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+h5 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+/* --- Period Mark (accent dot) --- */
+.period-mark {
+    color: var(--color-accent-600);
+}
+
+/* --- Intro Paragraph --- */
+.big-paragraph {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+/* --- Profile Header --- */
+.profile-header {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.profile-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 16px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(16, 42, 67, 0.1);
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.profile-role {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-accent-700);
+    margin-bottom: 12px;
+}
+
+.profile-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+/* --- Row Layout (reference pattern) --- */
+.row {
+    display: flex;
+    gap: 16px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.row-left {
+    flex: 0 0 200px;
+    padding-top: 4px;
+}
+
+.row-left h3 {
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+}
+
+.row-left .role {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-accent-700);
+    margin-bottom: 2px;
+}
+
+.row-left .time {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+
+.row-right {
+    flex: 1;
+    min-width: 0;
+}
+
+/* --- Project Block (inside row-right) --- */
+.project {
+    margin-bottom: 24px;
+}
+
+.project:last-child {
+    margin-bottom: 0;
+}
+
+.project h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.project .time {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+}
+
+.project p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.project ul {
+    padding-left: 20px;
+    margin: 4px 0;
+}
+
+.project ul li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2px;
+}
+
+/* Tech Stack inline */
+.tech-stack {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+
+/* --- Other Section (simple list with heading) --- */
+.other {
+    margin-bottom: 24px;
+}
+
+.other:last-child {
+    margin-bottom: 0;
+}
+
+.other h3 {
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+}
+
+.other .role {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-accent-700);
+}
+
+.other .time {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-left: 4px;
+}
+
+.other p,
+.other ul {
+    margin-top: 4px;
+}
+
+.other p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.other ul {
+    padding-left: 20px;
+}
+
+.other ul li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2px;
+}
+
+/* --- Publication Item --- */
+.pub-item {
+    margin-bottom: 16px;
+    padding-left: 16px;
+    border-left: 3px solid var(--color-primary-200);
+}
+
+.pub-item:last-child {
+    margin-bottom: 0;
+}
+
+.pub-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.pub-tag.sci {
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+}
+
+.pub-tag.journal {
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+}
+
+.pub-tag.conference {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+
+.pub-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.pub-meta {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+}
+
+/* --- Award Item --- */
+.award-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.award-item:last-child {
+    margin-bottom: 0;
+}
+
+.award-year-badge {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--color-primary-600);
+    padding: 2px 10px;
+    border-radius: 4px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.award-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.award-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* --- Education Row --- */
+.edu-item {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+.edu-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.edu-degree-badge {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--color-primary-700);
+    padding: 4px 12px;
+    border-radius: 6px;
+}
+
+.edu-details {
+    flex: 1;
+}
+
+.edu-school-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.edu-meta-info {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+}
+
+.edu-gpa-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent-700);
+    background: var(--color-accent-100);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+/* --- Skills Grid --- */
+.skills-category {
+    margin-bottom: 20px;
+}
+
+.skills-category:last-child {
+    margin-bottom: 0;
+}
+
+.skills-category h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag {
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: var(--color-gray-100);
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+    background: var(--color-primary-100);
+    color: var(--color-primary-800);
+}
+
+/* --- Contact List --- */
+.contact-list {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-list li {
+    margin-bottom: 8px;
+}
+
+.contact-list li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-accent-700);
+    padding: 4px 0;
+}
+
+.contact-list li a:hover {
+    color: var(--color-accent-600);
+}
+
+.contact-list li a svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* --- Footer --- */
+.resume-footer {
+    text-align: center;
+    padding: 32px 0;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid var(--color-gray-200);
+    margin-top: 48px;
+}
+
+/* --- Print Styles --- */
+@media print {
+    body {
+        font-size: 11pt;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .back-link {
+        display: none;
+    }
+
+    section {
+        page-break-inside: avoid;
+    }
+
+    a {
+        color: var(--text-primary);
+    }
+
+    .resume-footer {
+        display: none;
+    }
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 20px 80px;
+    }
+
+    h1, .profile-name {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Profile stacks vertically */
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Row stacks vertically */
+    .row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .row-left {
+        flex: none;
+    }
+
+    /* Award items wrap */
+    .award-item {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    /* Education items wrap */
+    .edu-item {
+        flex-direction: column;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 32px 16px 60px;
+    }
+
+    .profile-photo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .big-paragraph {
+        font-size: 0.95rem;
+    }
+}
