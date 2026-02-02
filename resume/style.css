@@ -260,10 +260,21 @@ h5 {
     margin-bottom: 2px;
 }
 
-/* Tech Stack inline */
-.tech-stack {
-    font-size: 0.85rem;
-    color: var(--text-tertiary);
+/* Tech Stack inline tags */
+.tech-stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.tech-stack-tags .tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: var(--color-gray-100);
+    color: var(--text-secondary);
 }
 
 /* --- Other Section (simple list with heading) --- */
@@ -364,6 +375,36 @@ h5 {
     font-size: 0.8rem;
     color: var(--text-tertiary);
     margin-top: 2px;
+}
+
+/* PDF Badge */
+.pdf-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: #fff;
+    background: var(--color-primary-600);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    vertical-align: middle;
+}
+
+.pdf-link:hover {
+    background: var(--color-primary-800);
+    color: #fff;
+    text-decoration: none;
+}
+
+.pdf-link svg {
+    width: 12px;
+    height: 12px;
 }
 
 /* --- Award Item --- */
