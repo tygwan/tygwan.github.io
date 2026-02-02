@@ -42,9 +42,11 @@
                     <h1 class="profile-name">윤태관<span class="period-mark">.</span></h1>
                     <p class="profile-role">AI & Computer Vision Researcher</p>
                     <p class="profile-desc">
-                        건축공학과 AI/CV 기술을 결합하여 건설 현장의 안전 문제를 해결하는 연구를 수행하고 있습니다.
-                        영상 기반 보행 패턴 분석, 멀티모달 라벨링 자동화, VLM 기반 위험요소 탐지 등의 연구를 진행해왔으며,
-                        연구 결과를 실무에 적용할 수 있는 소프트웨어로 구현하는 데 집중합니다.
+                        건설산업에서 AI/CV 기술을 결합하여 건설 현장의 안전 문제를 해결하는 연구를 수행했습니다.
+                        영상 기반 보행 패턴 분석, LMM 기반 멀티모달 라벨링 자동화, 위험요소 탐지 등의 연구를 진행해왔으며,
+                        연구 결과를 실무에 적용할 수 있는 소프트웨어로 구현하는,
+                        디지털 전환 기술 기반 플랜트 건설 사업관리 기술개발 연구 과제에 참여하고 있습니다.
+                        현재는 AI Native 기반의 개발자로서 트렌드를 따라가며 비즈니스 목표에 따라 함께 일 할 사람이 되고자 합니다.
                     </p>
                 </div>
             </div>
@@ -153,8 +155,8 @@
                     <li>FastAPI 기반 11개 마이크로서비스 아키텍처 설계 및 API Gateway 패턴 구현 (AgenticLabeling)</li>
                     <li>Express + Socket.IO 기반 실시간 서버 설계: OAuth 인증, Rate Limiting, WebSocket 통신 (rhytheme)</li>
                     <li>Next.js API Routes + Supabase 기반 SaaS 백엔드 구현: 크레딧 시스템, RLS 멀티테넌트 격리 (resumely)</li>
-                    <li>PostgreSQL 스키마 설계(RLS, 트리거, JSONB), SQLite 도메인 모델(10테이블, 12+ 인덱스), Neo4j 그래프 모델링</li>
-                    <li>RESTful API 설계: Pydantic v2 검증, Swagger 자동 문서화, 비동기 처리</li>
+                    <li>PostgreSQL 스키마 설계(RLS, 트리거, JSONB), SQLite 도메인 모델(10테이블, 12+ 인덱스), Neo4j 그래프 모델링 (resumely, student-manager, DXTnavis)</li>
+                    <li>RESTful API 설계: Pydantic v2 검증, Swagger 자동 문서화, 비동기 처리 (AgenticLabeling, palantir-stock)</li>
                 </ul>
                 <div class="tech-stack-tags" style="margin-top: 8px;">
                     <span class="tag">FastAPI</span>
@@ -169,14 +171,37 @@
                 </div>
             </div>
 
+            <!-- Frontend Engineering -->
+            <div class="other">
+                <h3>Frontend Engineering<span class="period-mark">.</span></h3>
+                <ul>
+                    <li>Next.js App Router 기반 SaaS 프론트엔드: shadcn/ui 컴포넌트 시스템, TailwindCSS v4 스타일링, 반응형 레이아웃 (resumely)</li>
+                    <li>Zustand 상태 관리 아키텍처: 8개 독립 스토어 설계, React Query 서버 상태 캐싱 및 낙관적 업데이트 (resumely, student-manager)</li>
+                    <li>dnd-kit 기반 드래그앤드롭 인터페이스 및 복합 폼 상태 관리 구현 (student-manager)</li>
+                    <li>Framer Motion 애니메이션 + Tone.js 오디오 엔진 + Socket.io 실시간 멀티플레이어 통합 (rhytheme, kids-on-boats-io)</li>
+                    <li>Dash/Plotly 기반 인터랙티브 데이터 시각화 대시보드 구축 (algo-quant)</li>
+                </ul>
+                <div class="tech-stack-tags" style="margin-top: 8px;">
+                    <span class="tag">React</span>
+                    <span class="tag">Next.js</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">TailwindCSS</span>
+                    <span class="tag">shadcn/ui</span>
+                    <span class="tag">Zustand</span>
+                    <span class="tag">React Query</span>
+                    <span class="tag">Framer Motion</span>
+                    <span class="tag">Socket.io</span>
+                </div>
+            </div>
+
             <!-- Infrastructure & Deployment -->
             <div class="other">
                 <h3>Infrastructure &amp; Deployment<span class="period-mark">.</span></h3>
                 <ul>
                     <li>Docker Compose 멀티서비스 오케스트레이션: 13서비스, NVIDIA GPU passthrough, 헬스체크, Named Volume (AgenticLabeling)</li>
-                    <li>서비스별 독립 스케일링 설계: GPU 서비스(Detection, Segmentation)와 CPU 서비스 분리</li>
-                    <li>MLflow 실험 추적 연동으로 모델 버저닝 및 성능 관리 체계 구축</li>
-                    <li>Vercel + Railway + Supabase 기반 클라우드 배포, n8n 셀프호스팅 자동화 환경 구성</li>
+                    <li>서비스별 독립 스케일링 설계: GPU 서비스(Detection, Segmentation)와 CPU 서비스 분리 (AgenticLabeling)</li>
+                    <li>MLflow 실험 추적 연동으로 모델 버저닝 및 성능 관리 체계 구축 (AgenticLabeling)</li>
+                    <li>Vercel + Railway + Supabase 기반 클라우드 배포, n8n 셀프호스팅 자동화 환경 구성 (resumely, rhytheme, n8n)</li>
                 </ul>
                 <div class="tech-stack-tags" style="margin-top: 8px;">
                     <span class="tag">Docker</span>
@@ -193,8 +218,8 @@
                 <h3>System Design &amp; Collaboration<span class="period-mark">.</span></h3>
                 <ul>
                     <li>프론트-백 분리 배포 아키텍처 설계 및 협업 구조 수립 (rhytheme, kids-on-boats-io)</li>
-                    <li>서비스 요구사항을 기술 구조로 해석: 건설안전 도메인의 CV 파이프라인 독자 설계 및 논문화</li>
-                    <li>아키텍처 문서, 유저 매뉴얼, 기술 설계서 작성을 통한 의사결정 과정 문서화</li>
+                    <li>서비스 요구사항을 기술 구조로 해석: 건설안전 도메인의 CV 파이프라인 독자 설계 및 논문화 (AgenticLabeling)</li>
+                    <li>아키텍처 문서, 유저 매뉴얼, 기술 설계서 작성을 통한 의사결정 과정 문서화 (ultra-cc-init, DXTnavis, AgenticLabeling)</li>
                     <li>AI-Native 개발 워크플로우 프레임워크 설계 및 오픈소스 배포 (cc-initializer: 25 에이전트, 18 스킬)</li>
                 </ul>
             </div>
