@@ -1,28 +1,25 @@
 /* ===================================
-   Claude Brand Style Portfolio
+   tygwan Portfolio - Main Stylesheet
+   Theme: tygwan-theme.css
    =================================== */
 
-/* CSS Variables - Claude Brand Colors */
+/* Variable Aliases: map legacy names → theme tokens */
 :root {
-    --claude-primary: #C15F3C;
-    --claude-primary-light: #da7756;
-    --claude-primary-dark: #a84e30;
-    --claude-cloudy: #B1ADA1;
-    --claude-pampas: #F4F3EE;
-    --claude-white: #FFFFFF;
-    --claude-dark: #1a1a1a;
-    --claude-text: #333333;
-    --claude-text-light: #666666;
+    --claude-primary: var(--color-primary-700);
+    --claude-primary-light: var(--color-primary-500);
+    --claude-primary-dark: var(--color-primary-800);
+    --claude-cloudy: var(--text-tertiary);
+    --claude-pampas: var(--surface-secondary);
+    --claude-white: var(--surface-primary);
+    --claude-dark: var(--text-primary);
+    --claude-text: var(--text-primary);
+    --claude-text-light: var(--text-secondary);
 
-    --font-serif: 'Libre Baskerville', Georgia, serif;
-    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-serif: var(--font-heading);
+    --font-sans: var(--font-body);
 
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-
-    --transition: 0.3s ease;
-    --border-radius: 8px;
+    --transition: var(--transition-base);
+    --border-radius: var(--radius-md);
 }
 
 /* Reset & Base */
@@ -113,7 +110,7 @@ section {
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(244, 243, 238, 0.95);
+    background: rgba(248, 249, 250, 0.95);
     backdrop-filter: blur(10px);
     transition: all var(--transition);
 }
@@ -195,7 +192,7 @@ section {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--claude-pampas) 0%, var(--claude-white) 100%);
+    background: linear-gradient(135deg, var(--surface-secondary) 0%, var(--surface-primary) 100%);
     padding-top: 80px;
     padding-bottom: 40px;
     position: relative;
@@ -225,7 +222,7 @@ section {
     border-radius: 16px;
     overflow: hidden;
     box-shadow:
-        0 20px 50px rgba(193, 95, 60, 0.15),
+        0 20px 50px rgba(51, 78, 104, 0.15),
         0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
@@ -269,7 +266,7 @@ section {
 .hero-title {
     font-size: 2.2rem;
     margin-bottom: 10px;
-    background: linear-gradient(135deg, var(--claude-dark) 0%, var(--claude-primary) 100%);
+    background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-accent-700) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -821,14 +818,14 @@ section {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--claude-primary), var(--claude-primary-light));
+    background: linear-gradient(90deg, var(--color-primary-700), var(--color-accent-500));
     transform: scaleX(0);
     transition: transform 0.4s ease;
 }
 
 .service-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(193, 95, 60, 0.15);
+    box-shadow: 0 20px 40px rgba(51, 78, 104, 0.15);
 }
 
 .service-card:hover::before {
@@ -886,8 +883,8 @@ section {
 }
 
 .service-card:hover .service-tags span {
-    background: rgba(193, 95, 60, 0.1);
-    color: var(--claude-primary);
+    background: rgba(51, 78, 104, 0.1);
+    color: var(--color-primary-700);
 }
 
 /* Tech Detail Section */
@@ -1762,7 +1759,7 @@ section {
 }
 
 .modal-model-tag {
-    background: linear-gradient(135deg, var(--claude-primary), var(--claude-primary-light));
+    background: linear-gradient(135deg, var(--color-primary-700), var(--color-accent-600));
     color: var(--claude-white);
     padding: 8px 16px;
     border-radius: 20px;

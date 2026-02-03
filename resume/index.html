@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="윤태관 - AI & Computer Vision 연구자, 건축공학 석사">
+    <meta name="description" content="윤태관 - AI Native Developer, 건축공학 석사">
     <meta name="keywords" content="윤태관, AI, Computer Vision, BIM, 건축공학, 이력서, Resume">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Resume - 윤태관">
-    <meta property="og:description" content="AI & Computer Vision 연구자, 건축공학 석사">
+    <meta property="og:description" content="AI Native Developer, 건축공학 석사">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ko_KR">
 
@@ -40,13 +40,12 @@
                 <img src="../assets/profile-resume.jpg" alt="윤태관" class="profile-photo">
                 <div class="profile-info">
                     <h1 class="profile-name">윤태관<span class="period-mark">.</span></h1>
-                    <p class="profile-role">AI & Computer Vision Researcher</p>
+                    <p class="profile-role">AI Native Developer</p>
                     <p class="profile-desc">
-                        건설산업에서 AI/CV 기술을 결합하여 건설 현장의 안전 문제를 해결하는 연구를 수행했습니다.
-                        영상 기반 보행 패턴 분석, LMM 기반 멀티모달 라벨링 자동화, 위험요소 탐지 등의 연구를 진행해왔으며,
-                        연구 결과를 실무에 적용할 수 있는 소프트웨어로 구현하는,
-                        디지털 전환 기술 기반 플랜트 건설 사업관리 기술개발 연구 과제에 참여하고 있습니다.
-                        현재는 AI Native 기반의 개발자로서 트렌드를 따라가며 비즈니스 목표에 따라 함께 일 할 사람이 되고자 합니다.
+                        건설산업에서 AI/CV 기술을 활용해 현장 안전 문제를 해결하는 연구를 수행했습니다.<br>
+                        영상 기반 보행 패턴 분석, 멀티모달 라벨링 자동화, 위험요소 탐지 등의 연구를 진행했으며,<br>
+                        현재는 디지털 전환 기반 플랜트 건설 사업관리 기술개발 과제에 참여하고 있습니다.<br>
+                        연구에서 쌓은 도메인 지식과 AI Native 개발 역량을 바탕으로, 비즈니스 가치를 만드는 개발자를 지향합니다.
                     </p>
                 </div>
             </div>
@@ -171,6 +170,29 @@
                 </div>
             </div>
 
+            <!-- Frontend Engineering -->
+            <div class="other">
+                <h3>Frontend Engineering<span class="period-mark">.</span></h3>
+                <ul>
+                    <li>Next.js App Router 기반 SaaS 프론트엔드: shadcn/ui 컴포넌트 시스템, TailwindCSS v4 스타일링, 반응형 레이아웃 (resumely)</li>
+                    <li>Zustand 상태 관리 아키텍처: 8개 독립 스토어 설계, React Query 서버 상태 캐싱 및 낙관적 업데이트 (resumely, student-manager)</li>
+                    <li>dnd-kit 기반 드래그앤드롭 인터페이스 및 복합 폼 상태 관리 구현 (student-manager)</li>
+                    <li>Framer Motion 애니메이션 + Tone.js 오디오 엔진 + Socket.io 실시간 멀티플레이어 통합 (rhytheme, kids-on-boats-io)</li>
+                    <li>Dash/Plotly 기반 인터랙티브 데이터 시각화 대시보드 구축 (algo-quant)</li>
+                </ul>
+                <div class="tech-stack-tags" style="margin-top: 8px;">
+                    <span class="tag">React</span>
+                    <span class="tag">Next.js</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">TailwindCSS</span>
+                    <span class="tag">shadcn/ui</span>
+                    <span class="tag">Zustand</span>
+                    <span class="tag">React Query</span>
+                    <span class="tag">Framer Motion</span>
+                    <span class="tag">Socket.io</span>
+                </div>
+            </div>
+
             <!-- Infrastructure & Deployment -->
             <div class="other">
                 <h3>Infrastructure &amp; Deployment<span class="period-mark">.</span></h3>
@@ -276,24 +298,34 @@
                         <span class="tag">Florence-2</span>
                     </div>
                 </a>
-                <a href="https://github.com/tygwan/DXTnavis" target="_blank" rel="noopener" class="project-card-mini">
-                    <span class="project-card-name">DXTnavis</span>
-                    <span class="project-card-desc">Navisworks BIM Property Viewer &amp; AWP 4D Automation Plugin</span>
-                    <div class="tech-stack-tags">
-                        <span class="tag">C#</span>
-                        <span class="tag">Navisworks API</span>
-                        <span class="tag">WPF</span>
-                    </div>
-                </a>
-                <a href="https://github.com/tygwan/physical-unity" target="_blank" rel="noopener" class="project-card-mini">
-                    <span class="project-card-name">physical-unity</span>
-                    <span class="project-card-desc">Unity + ROS2 + PyTorch 기반 자율주행 모션 플래닝 (RL/IL: PPO, SAC, GAIL)</span>
-                    <div class="tech-stack-tags">
-                        <span class="tag">C#</span>
-                        <span class="tag">Unity</span>
-                        <span class="tag">PyTorch</span>
-                    </div>
-                </a>
+                <div class="project-card-mini has-portfolio">
+                    <a href="https://tygwan.github.io/DXTnavis/" target="_blank" rel="noopener" class="project-card-link">
+                        <span class="project-card-name">DXTnavis <span class="portfolio-badge">Portfolio</span></span>
+                        <span class="project-card-desc">Navisworks BIM Property Viewer &amp; AWP 4D Automation Plugin</span>
+                        <div class="tech-stack-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">Navisworks API</span>
+                            <span class="tag">WPF</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/tygwan/DXTnavis" target="_blank" rel="noopener" class="project-github-link" title="View on GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <div class="project-card-mini has-portfolio">
+                    <a href="https://tygwan.github.io/physical-unity/" target="_blank" rel="noopener" class="project-card-link">
+                        <span class="project-card-name">physical-unity <span class="portfolio-badge">Portfolio</span></span>
+                        <span class="project-card-desc">Unity + ROS2 + PyTorch 기반 자율주행 모션 플래닝 (RL/IL: PPO, SAC, GAIL)</span>
+                        <div class="tech-stack-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">Unity</span>
+                            <span class="tag">PyTorch</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/tygwan/physical-unity" target="_blank" rel="noopener" class="project-github-link" title="View on GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                </div>
             </div>
 
             <!-- Sub Projects -->
@@ -301,16 +333,21 @@
                 <h3>Sub Projects<span class="period-mark">.</span></h3>
             </div>
             <div class="project-grid">
-                <a href="https://github.com/tygwan/ai-master-class" target="_blank" rel="noopener" class="project-card-mini sub">
-                    <span class="project-card-name">ai-master-class</span>
-                    <span class="project-card-desc">AI/ML 학습 및 실습 프로젝트 모음</span>
-                    <div class="tech-stack-tags">
-                        <span class="tag">AI Util</span>
-                        <span class="tag">Education</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">Claude Code</span>
-                    </div>
-                </a>
+                <div class="project-card-mini sub has-portfolio">
+                    <a href="https://tygwan.github.io/ai-master-class/" target="_blank" rel="noopener" class="project-card-link">
+                        <span class="project-card-name">ai-master-class <span class="portfolio-badge">Portfolio</span></span>
+                        <span class="project-card-desc">AI/ML 학습 및 실습 프로젝트 모음</span>
+                        <div class="tech-stack-tags">
+                            <span class="tag">AI Util</span>
+                            <span class="tag">Education</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Claude Code</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/tygwan/ai-master-class" target="_blank" rel="noopener" class="project-github-link" title="View on GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                </div>
                 <a href="https://github.com/tygwan/resumely" target="_blank" rel="noopener" class="project-card-mini sub">
                     <span class="project-card-name">resumely</span>
                     <span class="project-card-desc">AI 기반 이력서 생성 및 분석 도구</span>
@@ -329,15 +366,20 @@
                         <span class="tag">Backtrader</span>
                     </div>
                 </a>
-                <a href="https://github.com/tygwan/n8n" target="_blank" rel="noopener" class="project-card-mini sub">
-                    <span class="project-card-name">n8n</span>
-                    <span class="project-card-desc">n8n 자동화 워크플로우</span>
-                    <div class="tech-stack-tags">
-                        <span class="tag">n8n</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">REST API</span>
-                    </div>
-                </a>
+                <div class="project-card-mini sub has-portfolio">
+                    <a href="https://tygwan.github.io/n8n/" target="_blank" rel="noopener" class="project-card-link">
+                        <span class="project-card-name">n8n <span class="portfolio-badge">Portfolio</span></span>
+                        <span class="project-card-desc">n8n 자동화 워크플로우</span>
+                        <div class="tech-stack-tags">
+                            <span class="tag">n8n</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">REST API</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/tygwan/n8n" target="_blank" rel="noopener" class="project-github-link" title="View on GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                </div>
             </div>
         </section>
 

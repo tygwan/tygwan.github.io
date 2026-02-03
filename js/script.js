@@ -30,7 +30,7 @@ const CONFIG = {
         'Go': '#00ADD8',
         'Rust': '#dea584',
         'Java': '#b07219',
-        'default': '#B1ADA1'
+        'default': '#829ab1'
     },
     // Project cover images (fallback gradients if no image)
     projectCovers: {
@@ -43,7 +43,7 @@ const CONFIG = {
         'palantir-stock': 'linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)',
         'med-vision': 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
         'student-manager': 'linear-gradient(135deg, #fdcb6e 0%, #e17055 100%)',
-        'default': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+        'default': 'linear-gradient(135deg, #334e68 0%, #20c997 100%)'
     }
 };
 
