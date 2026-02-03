@@ -853,3 +853,67 @@ h5 {
         font-size: 0.95rem;
     }
 }
+
+/* --- Engineering Experience: Inline Status Tags --- */
+.ee-status {
+    font-size: 0.6rem;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+    margin-left: 2px;
+    white-space: nowrap;
+}
+.ee-status.paused {
+    background: rgba(148, 163, 184, 0.15);
+    color: #94a3b8;
+}
+.ee-status.in-progress {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+.ee-status.improving {
+    background: rgba(234, 179, 8, 0.1);
+    color: #ca8a04;
+}
+.ee-status.learning {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+/* --- Project Card: Status Badge --- */
+.project-status {
+    font-size: 0.55rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    vertical-align: middle;
+    margin-left: 4px;
+    white-space: nowrap;
+}
+.project-status.paused {
+    background: rgba(148, 163, 184, 0.15);
+    color: #94a3b8;
+}
+.project-status.in-progress {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+.project-status.improving {
+    background: rgba(234, 179, 8, 0.1);
+    color: #ca8a04;
+}
+.project-status.learning {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+@media print {
+    .ee-status, .project-status {
+        border: 1px solid currentColor;
+        background: none;
+    }
+}
