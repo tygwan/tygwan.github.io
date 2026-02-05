@@ -1071,7 +1071,12 @@ h5 {
 .project-chevron {
     width: 20px;
     height: 20px;
+    min-width: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    max-height: 20px;
     flex-shrink: 0;
+    color: var(--text-tertiary);
     color: var(--text-tertiary);
     transition: transform 0.2s ease;
     margin-left: 12px;
