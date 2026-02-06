@@ -172,6 +172,25 @@
                 </div>
             </div>
 
+            <!-- Data & Research Engineering -->
+            <div class="other">
+                <h3>Data &amp; Research Engineering<span class="period-mark">.</span></h3>
+                <ul>
+                    <li>웹 스크래핑 + AI 이미지 생성(Bing Image Creator) 기반 연구 데이터 수집 파이프라인 구축 (550+장 이미지, 998건 텍스트)</li>
+                    <li>Python GUI 설문 프로그램 개발 (PySimpleGUI) — IRB 심의, 42명 대상 온라인 설문 설계/시행, 2,562개 응답</li>
+                    <li>한국어 NLP 파이프라인: 3종 형태소 분석기(KoNLPy, soynlp) 비교, 728개 불용어 사전 구축, N-grams 분석</li>
+                    <li>비모수 통계 분석 (Kruskal-Wallis, Mann-Whitney U, Bootstrap 매개효과), OLS 회귀, 상관 분석</li>
+                </ul>
+                <div class="tech-stack-tags" style="margin-top: 8px;">
+                    <span class="tag">BeautifulSoup</span>
+                    <span class="tag">KoNLPy</span>
+                    <span class="tag">soynlp</span>
+                    <span class="tag">PySimpleGUI</span>
+                    <span class="tag">Web Scraping</span>
+                    <span class="tag">비모수 검정</span>
+                </div>
+            </div>
+
             <!-- System Design & Collaboration -->
             <div class="other">
                 <h3>System Design &amp; Collaboration<span class="period-mark">.</span></h3>
@@ -686,14 +705,31 @@
                 <div class="skills-tags">
                     <span class="skill-tag">PyTorch</span>
                     <span class="skill-tag">Florence-2</span>
-                    <span class="skill-tag">SAM2</span>
+                    <span class="skill-tag">SAM / SAM2</span>
                     <span class="skill-tag">YOLO</span>
                     <span class="skill-tag">DINOv2</span>
+                    <span class="skill-tag">Grounding DINO</span>
                     <span class="skill-tag">Transformers</span>
+                    <span class="skill-tag">Autodistill</span>
                     <span class="skill-tag">ML-Agents</span>
                     <span class="skill-tag">MLflow</span>
                     <span class="skill-tag">OpenAI API</span>
-                    <span class="skill-tag">Autodistill</span>
+                </div>
+            </div>
+
+            <!-- Data & Statistics -->
+            <div class="skills-category">
+                <h3>Data & Statistics<span class="period-mark">.</span></h3>
+                <div class="skills-tags">
+                    <span class="skill-tag">Web Scraping</span>
+                    <span class="skill-tag">BeautifulSoup</span>
+                    <span class="skill-tag">비모수 검정</span>
+                    <span class="skill-tag">Bootstrap 매개효과</span>
+                    <span class="skill-tag">OLS 회귀 분석</span>
+                    <span class="skill-tag">텍스트 마이닝</span>
+                    <span class="skill-tag">KoNLPy</span>
+                    <span class="skill-tag">soynlp</span>
+                    <span class="skill-tag">N-grams</span>
                 </div>
             </div>
 
@@ -812,6 +848,36 @@
                     <li>IFC → RDF/OWL 변환, SPARQL 쿼리 최적화 (14,800x+ 속도 향상)</li>
                     <li>Navisworks 플러그인 개발로 445K+ BIM 객체 처리 자동화</li>
                 </ul>
+                <details class="exp-more-detail">
+                    <summary>
+                        <svg class="more-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        More Detail
+                    </summary>
+                    <div class="exp-more-content">
+                        <h4>BIM-Ontology Pipeline</h4>
+                        <ul>
+                            <li>ifcopenshell 기반 IFC4 파일 파싱 → RDFLib + ifcOWL 매핑으로 RDF triple 자동 생성</li>
+                            <li>GraphDB / Neo4j 트리플 스토어 설계, SPARQL 1.1 쿼리 엔진 구축</li>
+                            <li>LRU 캐싱으로 SPARQL 쿼리 응답 14,800x+ 속도 개선</li>
+                            <li>7탭 웹 대시보드 (Overview, Buildings, Elements, SPARQL, Properties, Ontology, Reasoning)</li>
+                        </ul>
+                        <h4>Navisworks Plugin (DXTnavis)</h4>
+                        <ul>
+                            <li>C# / WPF 기반 Navisworks API 플러그인 독자 개발</li>
+                            <li>445K+ BIM 객체의 속성 추출/분류 자동화, AWP 4D 시뮬레이션</li>
+                            <li>29개 카테고리 Name-based Classification 엔진</li>
+                        </ul>
+                        <div class="tech-stack-tags">
+                            <span class="tag">ifcopenshell</span>
+                            <span class="tag">RDFLib</span>
+                            <span class="tag">SPARQL</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">WPF</span>
+                            <span class="tag">Navisworks API</span>
+                            <span class="tag">Neo4j</span>
+                        </div>
+                    </div>
+                </details>
             </div>
 
             <!-- 건설안전 AI 연구 -->
@@ -819,9 +885,9 @@
                 <div class="exp-header">
                     <div class="exp-title-row">
                         <h3>건설현장 보행자 안전 AI 연구<span class="period-mark">.</span></h3>
-                        <span class="exp-period">2023.03 - 2025.05</span>
+                        <span class="exp-period">2022.05 - 2025.08</span>
                     </div>
-                    <p class="exp-org">석사 연구 | 인천대학교 스마트건설연구실</p>
+                    <p class="exp-org">학부연구생 → 석사 연구 | 인천대학교 스마트건설연구실</p>
                 </div>
                 <ul class="exp-details">
                     <li>Open-Vocabulary Vision-Language 모델 기반 보행자 위험요소 탐지 파이프라인 개발</li>
@@ -829,6 +895,98 @@
                     <li>Autodistill 기반 멀티모달 라벨링 자동화 시스템 구축</li>
                     <li>Florence-2 + SAM2 + DINOv2 통합 라벨링 플랫폼 설계</li>
                 </ul>
+                <details class="exp-more-detail">
+                    <summary>
+                        <svg class="more-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        More Detail
+                    </summary>
+                    <div class="exp-more-content">
+                        <h4>데이터 수집 & 설문 설계</h4>
+                        <ul>
+                            <li>웹 스크래핑(Google Images) + Bing Image Creator(AI 이미지 생성)로 550+장 이미지 데이터셋 구축</li>
+                            <li>IRB 심의 승인 후 온라인 설문조사 설계/시행 — 42명 참여, 2,562개 응답 수집 (5점 Likert 척도)</li>
+                            <li>Python 3.12 기반 이미지 평가 GUI 프로그램 자체 개발 (PySimpleGUI, 자동저장, 랜덤 순서)</li>
+                            <li>국내 26개 건설현장 현장 답사, 1시간 25분 보행로 영상 수집 → 4,959장 이미지 추출</li>
+                        </ul>
+                        <h4>AI/CV 모델 활용</h4>
+                        <ul>
+                            <li>SAM(Segment Anything Model)으로 보도/장애물/방벽 픽셀 레벨 세그멘테이션</li>
+                            <li>Autodistill (SAM2 + Grounding DINO) 기반 자동 라벨링 — GPT-4o로 Caption Ontology 추론 형식 정의</li>
+                            <li>Florence-2 Vision-Language Model + SPICE 비지도학습 클러스터링 설계</li>
+                        </ul>
+                        <h4>통계 분석</h4>
+                        <ul>
+                            <li>Kendall's W 평가자 간 일치도 (W=0.72), Kruskal-Wallis H 검정, Dunn's post hoc 다중 비교</li>
+                            <li>Spearman 순위 상관 (ρ=0.856), OLS 회귀 분석 (R²=0.66)</li>
+                            <li>Bootstrap 매개효과 분석 (5,000 resamples), Mann-Whitney U 검정, Shapiro-Wilk 정규성 검정</li>
+                        </ul>
+                        <h4>성과</h4>
+                        <ul>
+                            <li>SCI 논문 1편 게재 (Applied Sciences, 2025), SCI 1편 투고 중</li>
+                            <li>ICCEPM 2024 국제학회 구두발표 (일본 삿포로), 건설관리학회 최우수상 수상</li>
+                            <li>NRF 연구비 지원 과제 (No. 2022R1F1A1072491)</li>
+                        </ul>
+                        <div class="tech-stack-tags">
+                            <span class="tag">SAM</span>
+                            <span class="tag">Autodistill</span>
+                            <span class="tag">Grounding DINO</span>
+                            <span class="tag">GPT-4o</span>
+                            <span class="tag">PySimpleGUI</span>
+                            <span class="tag">Web Scraping</span>
+                            <span class="tag">Bootstrap 통계</span>
+                            <span class="tag">비모수 검정</span>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <!-- 텍스트 마이닝 연구 -->
+            <div class="exp-card">
+                <div class="exp-header">
+                    <div class="exp-title-row">
+                        <h3>건설안전 사고 데이터 텍스트 마이닝<span class="period-mark">.</span></h3>
+                        <span class="exp-period">2023.06 - 2024.05</span>
+                    </div>
+                    <p class="exp-org">석사 연구 | 인천대학교 스마트건설연구실</p>
+                </div>
+                <ul class="exp-details">
+                    <li>건설현장 보행자 사고 텍스트 데이터 NLP 파이프라인 구축</li>
+                    <li>3종 한국어 형태소 분석기 비교 평가 (Okt, KKMA, soynlp)</li>
+                    <li>N-grams 기반 사고 원인 키워드 연관 분석, 지역 추출 93.9% 정확도</li>
+                </ul>
+                <details class="exp-more-detail">
+                    <summary>
+                        <svg class="more-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        More Detail
+                    </summary>
+                    <div class="exp-more-content">
+                        <h4>데이터 수집 & 전처리</h4>
+                        <ul>
+                            <li>구글 뉴스 검색으로 건설현장 보행자 사고 뉴스 33건 수집 (2022.01~2023.12)</li>
+                            <li>건설공사 안전관리 종합정보망에서 998건 사고 사례 텍스트 확보</li>
+                            <li>BeautifulSoup 웹 크롤링으로 대한민국 행정구역 사전 자동 구축 (위키피디아)</li>
+                        </ul>
+                        <h4>NLP 파이프라인</h4>
+                        <ul>
+                            <li>13,883개 형태소 추출 → 4,039개 유효 형태소 선별</li>
+                            <li>KoNLPy (Okt, KKMA) + soynlp 3종 형태소 분석기 성능 비교</li>
+                            <li>728개 불용어 사전 구축, 응집확률(Cohesion probability) 기반 필터링</li>
+                            <li>N-grams (3-gram) 기반 사고 원인 키워드 연관 분석</li>
+                        </ul>
+                        <h4>성과</h4>
+                        <ul>
+                            <li>한국건설안전학회 학술지 게재 (2024.05)</li>
+                            <li>NRF 연구비 지원 과제 (No. NRF-2022R1F1A1072491)</li>
+                        </ul>
+                        <div class="tech-stack-tags">
+                            <span class="tag">KoNLPy</span>
+                            <span class="tag">soynlp</span>
+                            <span class="tag">BeautifulSoup</span>
+                            <span class="tag">N-grams</span>
+                            <span class="tag">텍스트 마이닝</span>
+                        </div>
+                    </div>
+                </details>
             </div>
 
             <!-- 학부 연구 -->
@@ -844,6 +1002,27 @@
                     <li>BIM 모델에서 자재 물량 자동 추출 및 탄소 배출량 계산</li>
                     <li>건설관리학회 학술대회 포스터 발표</li>
                 </ul>
+                <details class="exp-more-detail">
+                    <summary>
+                        <svg class="more-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        More Detail
+                    </summary>
+                    <div class="exp-more-content">
+                        <h4>연구 내용</h4>
+                        <ul>
+                            <li>Revit BIM 모델에서 물량 산출 기능으로 구조재료 물량 자동 추출</li>
+                            <li>Carbon Insights 플러그인의 탄소 계수 데이터베이스 활용</li>
+                            <li>부재별(기둥/보/바닥/벽) 탄소 발자국 비중 분석</li>
+                            <li>대안 공법(프리캐스트 vs 현장타설) 탄소 절감 비교 시뮬레이션</li>
+                            <li>프리캐스트 공법 적용 시 1,625톤+ CO₂ 절감 가능성 도출</li>
+                        </ul>
+                        <div class="tech-stack-tags">
+                            <span class="tag">Revit</span>
+                            <span class="tag">Carbon Insights</span>
+                            <span class="tag">BIM 물량산출</span>
+                        </div>
+                    </div>
+                </details>
             </div>
         </section>
 

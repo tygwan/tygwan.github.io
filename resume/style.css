@@ -1315,6 +1315,90 @@ h5 {
     margin-bottom: 0;
 }
 
+/* --- More Detail (nested details inside exp-card) --- */
+.exp-more-detail {
+    margin-top: 12px;
+    border: 1px solid var(--color-gray-100);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.exp-more-detail summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    list-style: none;
+    background: var(--color-gray-50);
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.exp-more-detail summary::-webkit-details-marker {
+    display: none;
+}
+
+.exp-more-detail summary:hover {
+    color: var(--text-secondary);
+    background: var(--color-gray-100);
+}
+
+.exp-more-detail summary .more-chevron {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.exp-more-detail[open] summary .more-chevron {
+    transform: rotate(180deg);
+}
+
+.exp-more-detail[open] summary {
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+.exp-more-content {
+    padding: 14px 16px;
+}
+
+.exp-more-content h4 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 12px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.exp-more-content h4:first-child {
+    margin-top: 0;
+}
+
+.exp-more-content ul {
+    margin: 0;
+    padding-left: 16px;
+}
+
+.exp-more-content li {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 4px;
+}
+
+.exp-more-content li:last-child {
+    margin-bottom: 0;
+}
+
+.exp-more-content .tech-stack-tags {
+    margin-top: 10px;
+}
+
 @media (max-width: 768px) {
     .exp-title-row {
         flex-direction: column;
