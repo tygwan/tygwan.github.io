@@ -781,6 +781,427 @@ h5 {
     margin-top: 48px;
 }
 
+/* --- AI Development Stack Section --- */
+
+/* Expandable Summary */
+.ai-stack-expand {
+    border: 1px solid var(--color-primary-200);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.02) 0%, rgba(16, 42, 67, 0.03) 100%);
+}
+
+.ai-stack-expand:hover {
+    border-color: var(--color-accent-600);
+}
+
+.ai-stack-expand[open] {
+    border-color: var(--color-accent-600);
+}
+
+.ai-stack-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.2s ease;
+}
+
+.ai-stack-summary::-webkit-details-marker {
+    display: none;
+}
+
+.ai-stack-summary:hover {
+    background: rgba(37, 99, 235, 0.04);
+}
+
+.ai-stack-summary-text {
+    flex: 1;
+}
+
+.ai-stack-summary-text p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.ai-stack-summary-text p:first-child {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.ai-stack-summary-text strong {
+    color: var(--color-accent-700);
+    font-weight: 700;
+}
+
+.ai-stack-chevron {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    flex-shrink: 0;
+    color: var(--color-accent-600);
+    transition: transform 0.25s ease;
+    margin-left: 16px;
+}
+
+.ai-stack-expand[open] .ai-stack-chevron {
+    transform: rotate(180deg);
+}
+
+.ai-stack-content {
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--color-gray-100);
+}
+
+@media (max-width: 768px) {
+    .ai-stack-summary {
+        padding: 16px;
+    }
+
+    .ai-stack-content {
+        padding: 0 16px 16px;
+    }
+
+    .ai-stack-summary-text p {
+        font-size: 0.85rem;
+    }
+}
+
+.ai-usage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+    margin-bottom: 16px;
+}
+
+.ai-usage-card {
+    border: 1px solid var(--color-gray-200);
+    border-radius: 12px;
+    padding: 24px;
+    background: #fff;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-usage-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+}
+
+.claude-card::before {
+    background: linear-gradient(90deg, #d97706, #f59e0b);
+}
+
+.codex-card::before {
+    background: linear-gradient(90deg, #059669, #10b981);
+}
+
+.ai-usage-card:hover {
+    border-color: var(--color-primary-300);
+    box-shadow: 0 4px 16px rgba(16, 42, 67, 0.08);
+    transform: translateY(-2px);
+}
+
+.ai-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.ai-card-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.claude-card .ai-card-logo {
+    background: rgba(217, 119, 6, 0.1);
+    color: #d97706;
+}
+
+.codex-card .ai-card-logo {
+    background: rgba(5, 150, 105, 0.1);
+    color: #059669;
+}
+
+.ai-card-name {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.ai-card-plan {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+}
+
+.ai-card-stats {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.ai-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.ai-stat-value {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.ai-stat-plus {
+    font-size: 1rem;
+    color: var(--text-tertiary);
+}
+
+.ai-stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+}
+
+/* Weekly Usage Simple */
+.ai-card-weekly-simple {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: var(--color-gray-50);
+    margin-bottom: 8px;
+}
+
+.ai-weekly-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.ai-weekly-value {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.ai-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-gray-100);
+    margin-top: 4px;
+}
+
+.ai-card-total {
+    font-size: 0.68rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+}
+
+.ai-card-period {
+    font-size: 0.68rem;
+    color: var(--text-tertiary);
+    text-align: right;
+}
+
+/* Combined Summary Bar */
+.ai-combined-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 16px 24px;
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 10px;
+}
+
+.ai-combined-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.ai-combined-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.ai-combined-value {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.ai-combined-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--color-gray-200);
+}
+
+/* AI Orchestration Framework Panel */
+.ai-orch-panel {
+    margin-top: 16px;
+    padding: 20px 24px;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(16, 42, 67, 0.02) 0%, rgba(37, 99, 235, 0.03) 100%);
+    position: relative;
+}
+
+.ai-orch-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.ai-orch-label {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.ai-orch-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(5, 150, 105, 0.1);
+    color: #059669;
+    border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+.ai-orch-desc {
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+    margin-bottom: 14px;
+}
+
+.ai-orch-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.ai-orch-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 16px;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 8px;
+    background: #fff;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+}
+
+.ai-orch-item:hover {
+    border-color: var(--color-primary-300);
+    box-shadow: 0 2px 8px rgba(16, 42, 67, 0.06);
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.ai-orch-item-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'Pretendard', monospace;
+}
+
+.ai-orch-item-target {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+}
+
+.ai-orch-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.ai-orch-metric {
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--color-gray-100);
+    color: var(--text-secondary);
+}
+
+.ai-orch-metric strong {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .ai-usage-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-combined-bar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .ai-combined-divider {
+        width: 60%;
+        height: 1px;
+    }
+
+    .ai-orch-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-orch-panel {
+        padding: 16px;
+    }
+}
+
 /* --- Print Styles --- */
 @media print {
     body {
