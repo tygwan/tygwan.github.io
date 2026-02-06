@@ -282,10 +282,14 @@ h5 {
 /* --- Other Section (simple list with heading) --- */
 .other {
     margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--color-gray-100);
 }
 
 .other:last-child {
     margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 .other h3 {
@@ -869,16 +873,35 @@ h5 {
     gap: 4px;
     font-size: 0.7rem;
     font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 4px;
+    padding: 3px 10px;
+    border-radius: 12px;
     text-decoration: none;
     transition: all 0.2s ease;
     border: 1px solid transparent;
+    cursor: pointer;
+}
+
+/* Internal project link indicator (scroll down) */
+.ee-project-tag[href^="#"]::before {
+    content: '↓';
+    font-size: 0.6rem;
+    opacity: 0.6;
+}
+
+/* External link indicator */
+.ee-project-tag[target="_blank"]::before {
+    content: '↗';
+    font-size: 0.6rem;
+    opacity: 0.6;
 }
 
 .ee-project-tag:hover {
     text-decoration: none;
     transform: translateY(-1px);
+}
+
+.ee-project-tag:hover::before {
+    opacity: 1;
 }
 
 /* In Progress - Blue */
@@ -1000,6 +1023,18 @@ h5 {
     }
 }
 
+/* --- Project Highlight Animation (from EE click) --- */
+@keyframes project-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+.project-details.highlight {
+    border-color: var(--color-accent-600) !important;
+    animation: project-pulse 0.6s ease-out 3;
+}
+
 /* --- Project Details (Collapse/Expand) --- */
 .project-details {
     border: 1px solid var(--color-gray-200);
@@ -1076,7 +1111,6 @@ h5 {
     min-height: 20px;
     max-height: 20px;
     flex-shrink: 0;
-    color: var(--text-tertiary);
     color: var(--text-tertiary);
     transition: transform 0.2s ease;
     margin-left: 12px;

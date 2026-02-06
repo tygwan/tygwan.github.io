@@ -7,6 +7,7 @@ const CONFIG = {
     githubUsername: 'tygwan',
     featuredProjects: [
         'AgenticLabeling',
+        'ultra-cc-init',
         'binance-algo-trading',
         'cc-initializer',
         'DXTnavis',
@@ -36,6 +37,7 @@ const CONFIG = {
     projectCovers: {
         'AgenticLabeling': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         'binance-algo-trading': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+        'ultra-cc-init': 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)',
         'cc-initializer': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
         'DXTnavis': 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
         'AgenticREVIT': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',

@@ -16,6 +16,23 @@
     },
     "models": ["Florence-2", "SAM2", "DINOv2", "YOLOv8"]
   },
+  "ultra-cc-init": {
+    "summary": "Claude Code context optimizer — 97% token reduction via MANIFEST routing & progressive loading",
+    "frontend": {
+      "stack": [],
+      "screenshots": [],
+      "description": "CLI 기반, UI 없음"
+    },
+    "backend": {
+      "stack": ["Bash", "JSON", "Markdown", "YAML"],
+      "description": "MANIFEST 기반 라우팅으로 38K → 1.1K 토큰 절감, 점진적 로딩 아키텍처",
+      "architecture": {
+        "type": "mermaid",
+        "code": "graph TD\n    INIT[Session Start] --> MF[MANIFEST.md Router]\n    MF --> |On-demand| DOCS[docs/ Loading]\n    MF --> |Lazy| AGENTS[Agents Loading]\n    MF --> |Deferred| SKILLS[Skills Loading]\n    DOCS --> CTX[Context Window]\n    AGENTS --> CTX\n    SKILLS --> CTX\n    CTX --> |1.1K tokens| SESSION[Optimized Session]"
+      }
+    },
+    "models": ["Claude Code"]
+  },
   "cc-initializer": {
     "summary": "Claude Code configuration framework for AI-assisted development workflows",
     "frontend": {
