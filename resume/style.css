@@ -536,6 +536,26 @@ h5 {
     color: var(--color-primary-800);
 }
 
+/* --- Skills Subcategory --- */
+.skills-subcategory {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.skills-subcategory:last-child {
+    margin-bottom: 0;
+}
+
+.skills-sub-label {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    min-width: 64px;
+}
+
 /* --- Expandable Project Preview --- */
 .project-preview {
     margin-top: 12px;
